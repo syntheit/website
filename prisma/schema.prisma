@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  message   String
+  ipAddress String?
+  userAgent String?
+  isSpam    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([ipAddress])
+  @@index([isSpam])
+}
+
+model ResourceSuggestion {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  url         String
+  category    String
+  notes       String?
+  ipAddress   String?
+  userAgent   String?
+  isSpam      Boolean  @default(false)
+  isApproved  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([ipAddress])
+  @@index([isSpam])
+  @@index([isApproved])
+  @@index([category])
+}
