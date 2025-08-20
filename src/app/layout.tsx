@@ -3,6 +3,9 @@ import "@/styles/globals.css"
 import { Lora } from "next/font/google";
 import { type Metadata, type Viewport } from "next";
 import { Providers } from "./providers";
+import PlausibleProvider from 'next-plausible';
+
+const description = "Software engineer, photographer, and entrepreneur living in Buenos Aires";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -11,7 +14,7 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: "Daniel Miller",
-  description: "Software engineer, photographer, and creator. Personal website showcasing projects, photography, and resources.",
+  description,
   authors: [{ name: "Daniel Miller" }],
   creator: "Daniel Miller",
   publisher: "Daniel Miller",
@@ -24,13 +27,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://www.matv.io",
     title: "Daniel Miller",
-    description: "Software engineer, photographer, and creator. Personal website showcasing projects, photography, and resources.",
+    description,
     siteName: "Daniel Miller",
   },
   twitter: {
     card: "summary_large_image",
     title: "Daniel Miller",
-    description: "Software engineer, photographer, and creator. Personal website showcasing projects, photography, and resources.",
+    description,
     creator: "@syntheit",
   },
   robots: {
@@ -57,7 +60,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={lora.variable}>
       <body className="font-lora">
-        <Providers>{children}</Providers>
+        <PlausibleProvider 
+          domain="matv.io"
+          customDomain="https://analytics.matv.io"
+          selfHosted={true}
+        >
+          <Providers>{children}</Providers>
+        </PlausibleProvider>
       </body>
     </html>
   );
