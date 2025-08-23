@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ABOUT_DATA } from "@/data/about";
+import { ABOUT_DATA } from "@/app/metadata/about";
 import {
   HeroSection,
   QuickInfoSection,

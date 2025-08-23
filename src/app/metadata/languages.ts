@@ -67,7 +67,7 @@ export const languages: Language[] = [
     level: "Intermediate",
     delfLevel: "B2",
     years: 9,
-    description: "I started in high school, passed B2 exam senior year. I can handle conversations and read texts.",
+    description: "I started in middle school, passed B2 exam senior year. I can handle conversations and read texts.",
     flag: "🇫🇷",
     proficiency: getDelfProficiency("B2"),
     goals: ["Reach C1 level", "Advance speaking skills"],

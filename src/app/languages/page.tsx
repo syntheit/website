@@ -22,7 +22,7 @@ import {
   learningStrategy,
   futureGoals,
   languageLearningResources,
-} from "@/data/languages";
+} from "@/app/metadata/languages";
 
 export default function LanguagesPage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);

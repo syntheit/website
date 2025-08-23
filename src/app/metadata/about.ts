@@ -17,6 +17,7 @@ export const ABOUT_DATA = {
     { name: "French", level: "B2" },
     { name: "Ukrainian", level: "A2" },
     { name: "Russian", level: "A2" },
+    { name: "Portuguese", level: "A1" },
   ],
 
   interestsList: [
