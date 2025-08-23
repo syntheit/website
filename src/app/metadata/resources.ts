@@ -13,6 +13,7 @@ import {
   Map,
   Monitor,
   Grid3X3,
+  Podcast,
 } from "lucide-react";
 import { FiYoutube } from "react-icons/fi";
 
@@ -32,6 +33,7 @@ export const tabs = [
   { id: "technology", name: "Technology", icon: Monitor },
   { id: "random", name: "Random Cool Stuff", icon: Lightbulb },
   { id: "youtube", name: "Youtube", icon: FiYoutube },
+  { id: "podcasts", name: "Podcasts", icon: Podcast },
 ];
 
 export const resources = {
@@ -3541,6 +3543,11 @@ export const resources = {
   ],
   random: [
     {
+      title: "Tom Scott's newsletter",
+      description: "A weekly newsletter from Tom Scott",
+      url: "https://www.tomscott.com/newsletter/",
+    },
+    {
       title: "Simon Vreman’s website",
       description:
         "Homepage of Simon Vreman, featuring personal projects and collections.",
@@ -4800,6 +4807,58 @@ export const resources = {
       description:
         "Brazilian Portuguese-speaking explanations of linguistic concepts.",
       url: "https://www.youtube.com/@Alomorfe",
+    },
+  ],
+  podcasts: [
+    {
+      title: "Acquired",
+      description: "A podcast about the history of technology and business.",
+      url: "https://www.acquired.fm/",
+    },
+    {
+      title: "Lateral with Tom Scott",
+      description: "Comedy panel game podcast about weird questions with wonderful answers",
+      url: "https://lateralcast.com/",
+    },
+    {
+      title: "Waveform",
+      description: "A podcast run by the MKBHD team about technology and a bit of everything else",
+      url: "https://podcasts.voxmedia.com/show/waveform-the-mkbhd-podcast",
+    },
+    {
+      title: "Let's Learn Everything",
+      description: "A fun podcast about learning everything, with no specific topic",
+      url: "https://pod.link/1587816694",
+    },
+    {
+      title: "How I Built This with Guy Raz",
+      description: "A podcast about how people built their companies",
+      url: "https://pod.link/1150510297",
+    },
+    {
+      title: "Wisdom From The Top with Guy Raz",
+      description: "A podcast with interviews top leaders about their struggles, failures, and successes to uncover lessons in leadership and business.",
+      url: "https://pod.link/1460154838",
+    },
+    {
+      title: "ACQ2",
+      description: "A spin-off of Acquired, with smaller episodes and interviews",
+      url: "https://pod.link/acquiredlp",
+    },
+    {
+      title: "Pekingology",
+      description: "A podcast about the geopolitics of China",
+      url: "https://www.csis.org/podcasts/pekingology",
+    },
+    {
+      title: "The Red Line",
+      description: "A podcast about geopolitics today",
+      url: "https://www.theredlinepodcast.com/",
+    },
+    {
+      title: "Lingthusiasm",
+      description: "A podcast about language and linguistics",
+      url: "https://www.lingthusiasm.com/",
     },
   ],
 };
