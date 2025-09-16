@@ -39,6 +39,12 @@ export const tabs = [
 export const resources = {
   coding: [
     {
+      title: "Project-Based Learning",
+      description:
+        "A GitHub repository with a curated list of project-based tutorials for various programming languages.",
+      url: "https://github.com/practical-tutorials/project-based-learning",
+    },
+    {
       title: "Awesome Piracy",
       description:
         "Curated list of piracy-related resources, tools, and sites hosted on GitHub Pages.",
@@ -168,6 +174,96 @@ export const resources = {
   ],
   languages: [
     {
+      title: "Easy Languages",
+      description:
+        "A language-learning platform that uses street interviews to teach languages in a natural context.",
+      url: "https://www.easy-languages.org/",
+    },
+    {
+      title: "Modern Standard Arabic",
+      description:
+        "Wikipedia article on the standardized variety of Arabic used in writing and formal speech.",
+      url: "https://en.wikipedia.org/wiki/Modern_Standard_Arabic",
+    },
+    {
+      title: "Varieties of Chinese",
+      description:
+        "Wikipedia article outlining the different language varieties that are part of the Chinese language group.",
+      url: "https://en.wikipedia.org/wiki/Varieties_of_Chinese",
+    },
+    {
+      title: "Sinitic languages",
+      description:
+        "Wikipedia article on the Sinitic branch of the Sino-Tibetan language family, which includes the Chinese languages.",
+      url: "https://en.wikipedia.org/wiki/Sinitic_languages",
+    },
+    {
+      title: "AlphaDictionary Russian Grammar",
+      description:
+        "An online reference for Russian grammar rules and structures.",
+      url: "https://www.alphadictionary.com/rusgrammar/",
+    },
+    {
+      title: "Guarani language",
+      description:
+        "Wikipedia article on the indigenous language of South America, which is an official language of Paraguay.",
+      url: "https://en.wikipedia.org/wiki/Guarani_language",
+    },
+    {
+      title: "Dalmatian language",
+      description:
+        "Wikipedia article about the extinct Romance language once spoken in the Dalmatia region of Croatia.",
+      url: "https://en.wikipedia.org/wiki/Dalmatian_language",
+    },
+    {
+      title: "Alaskan Russian",
+      description:
+        "Wikipedia article on the dialect of Russian spoken in Alaska, with influences from indigenous languages.",
+      url: "https://en.wikipedia.org/wiki/Alaskan_Russian",
+    },
+    {
+      title: "Arebica",
+      description:
+        "Wikipedia article about the Arebica script, a variant of the Perso-Arabic script used to write the Bosnian language.",
+      url: "https://en.wikipedia.org/wiki/Arebica",
+    },
+    {
+      title: "Glagolitic script",
+      description:
+        "Wikipedia article about the Glagolitic script, the oldest known Slavic alphabet.",
+      url: "https://en.wikipedia.org/wiki/Glagolitic_script",
+    },
+    {
+      title: "Russian terms derived from French",
+      description:
+        "A Wiktionary category page listing Russian words that are derived from French.",
+      url: "https://en.m.wiktionary.org/wiki/Category:Russian_terms_derived_from_French",
+    },
+    {
+      title: "Occitan language",
+      description:
+        "Wikipedia article about the Occitan language, a Romance language spoken in Southern France, Monaco, and other areas.",
+      url: "https://en.wikipedia.org/wiki/Occitan_language",
+    },
+    {
+      title: "Gulf Pidgin Arabic",
+      description:
+        "Wikipedia article on the pidgin Arabic dialect spoken by foreign workers in the Persian Gulf.",
+      url: "https://en.wikipedia.org/wiki/Gulf_Pidgin_Arabic",
+    },
+    {
+      title: "Multilingualism",
+      description:
+        "Wikipedia article on the use of more than one language by an individual or a community.",
+      url: "https://en.wikipedia.org/wiki/Multilingualism",
+    },
+    {
+      title: "Idiolect",
+      description:
+        "Wikipedia article explaining an idiolect, an individual's unique use of language.",
+      url: "https://en.wikipedia.org/wiki/Idiolect",
+    },
+    {
       title: "Ukrainian Resources",
       description: "Educational platform offering Ukrainian resources.",
       url: "https://www.ukrainianlessons.com/",
@@ -195,6 +291,30 @@ export const resources = {
     },
   ],
   wikipedia: [
+    {
+      title: "Yevgeny Zamyatin",
+      description:
+        "Wikipedia article on the life and work of the influential Russian dystopian author Yevgeny Zamyatin.",
+      url: "https://en.wikipedia.org/wiki/Yevgeny_Zamyatin",
+    },
+    {
+      title: "Kafala system",
+      description:
+        "Wikipedia article explaining the sponsorship system for migrant workers used in some Middle Eastern countries.",
+      url: "https://en.wikipedia.org/wiki/Kafala_system",
+    },
+    {
+      title: "Australian rules football",
+      description:
+        "Wikipedia article about the contact sport played with an oval ball between two teams of 18 players.",
+      url: "https://en.wikipedia.org/wiki/Australian_rules_football",
+    },
+    {
+      title: "Cliff Young (athlete)",
+      description:
+        "Wikipedia article about the Australian potato farmer and ultramarathon runner who won the Sydney to Melbourne Ultramarathon at 61.",
+      url: "https://en.wikipedia.org/wiki/Cliff_Young_(athlete)",
+    },
     {
       title: "2025 Moldovan energy crisis",
       description:
@@ -2320,6 +2440,12 @@ export const resources = {
   ],
   games: [
     {
+      title: "Capoeira",
+      description:
+        "Wikipedia article on the Afro-Brazilian martial art that combines elements of dance, acrobatics, and music.",
+      url: "https://en.wikipedia.org/wiki/Capoeira",
+    },
+    {
       title: "Where does your streaming money go?",
       description:
         "Insightful article on the economics of music stream services and how they work.",
@@ -2353,6 +2479,48 @@ export const resources = {
     },
   ],
   articles: [
+    {
+      title: "Sebastião Salgado",
+      description:
+        "Wikipedia article on the Brazilian social documentary photographer and photojournalist.",
+      url: "https://en.wikipedia.org/wiki/Sebasti%C3%A3o_Salgado",
+    },
+    {
+      title: "Thomas Cole",
+      description:
+        "Wikipedia article on the English-born American artist and founder of the Hudson River School art movement.",
+      url: "https://en.wikipedia.org/wiki/Thomas_Cole",
+    },
+    {
+      title: "South America's Electric Car Surge",
+      description:
+        "An article from CleanTechnica discussing the acceleration of electric vehicle adoption in South America.",
+      url: "https://cleantechnica.com/2025/08/19/south-americas-electric-car-surge-from-lagging-to-accelerating/",
+    },
+    {
+      title: "Cost of Electricity by Country",
+      description:
+        "A country-by-country comparison of electricity costs provided by World Population Review.",
+      url: "https://worldpopulationreview.com/country-rankings/cost-of-electricity-by-country",
+    },
+    {
+      title: "China's Surveillance of 'Troubled People'",
+      description:
+        "A Wall Street Journal article on how China is using surveillance to monitor individuals deemed a threat to public order.",
+      url: "https://www.wsj.com/world/china/china-surveillance-troubled-people-public-order-6e734df4",
+    },
+    {
+      title: "Housing First",
+      description:
+        "Wikipedia article on the policy approach that prioritizes providing permanent housing to homeless individuals.",
+      url: "https://en.wikipedia.org/wiki/Housing_First",
+    },
+    {
+      title: "China, Brazil, and Electric Vehicles",
+      description:
+        "A New York Times article exploring the relationship between China and Brazil in the context of the electric vehicle market.",
+      url: "https://www.nytimes.com/2025/07/21/climate/china-brazil-electric-vehicles.html",
+    },
     {
       title: "The leaning towers of Pizza Hut",
       description:
@@ -2864,9 +3032,10 @@ export const resources = {
       featured: false,
     },
     {
-      title: "BBC - Magazine Article",
+      title:
+        "Cheran: The town that threw out police, politicians and gangsters",
       description:
-        "BBC magazine article covering various topics and current events.",
+        "A small town in Michoacan, Mexico got rid of both gansters and politicians to get rid of organized crime",
       url: "https://www.bbc.com/news/magazine-37612083",
       category: "News",
       featured: false,
@@ -3338,6 +3507,30 @@ export const resources = {
   ],
   health: [
     {
+      title: "Guarana",
+      description:
+        "Wikipedia article on the climbing plant native to the Amazon basin, known for its stimulant properties.",
+      url: "https://en.wikipedia.org/wiki/Guarana",
+    },
+    {
+      title: "Epicurious",
+      description:
+        "An online resource for recipes, cooking tips, and food-related articles.",
+      url: "https://www.epicurious.com/",
+    },
+    {
+      title: "DAREBEE",
+      description:
+        "A resource for at-home fitness with a large collection of workouts and programs.",
+      url: "https://darebee.com/",
+    },
+    {
+      title: "Healthy Recipes Blogs",
+      description:
+        "A blog featuring a collection of healthy recipes for various dietary needs.",
+      url: "https://healthyrecipesblogs.com/",
+    },
+    {
       title: "Overrelying on navigation apps might affect your brain",
       description:
         "Article suggesting Google Maps use could reduce spatial memory-related grey matter due to outsourcing navigation.",
@@ -3386,6 +3579,18 @@ export const resources = {
     },
   ],
   travel: [
+    {
+      title: "A quick guide to Beirut's best neighbourhoods",
+      description:
+        "A Lonely Planet article providing an overview of the different neighborhoods in Beirut.",
+      url: "https://www.lonelyplanet.com/articles/quick-guide-beiruts-best-neighbourhoods",
+    },
+    {
+      title: "CoolWorks",
+      description:
+        "A job search website specializing in seasonal and outdoor opportunities in 'great places.'",
+      url: "https://www.coolworks.com/",
+    },
     {
       title: "Friendliest city in Brazil",
       description:
@@ -3543,6 +3748,30 @@ export const resources = {
   ],
   random: [
     {
+      title: "Galton–Watson process",
+      description:
+        "Wikipedia article on a branching stochastic process used to model population growth and extinction.",
+      url: "https://en.wikipedia.org/wiki/Galton%E2%80%93Watson_process",
+    },
+    {
+      title: "freemediaheckyeah",
+      description:
+        "A comprehensive collection of free online resources for media, software, and educational content.",
+      url: "https://fmhy.net/",
+    },
+    {
+      title: "Wimpy",
+      description:
+        "A French Wikipedia article about J. Wellington Wimpy, the hamburger-loving character from the Popeye comics.",
+      url: "https://fr.wikipedia.org/wiki/Wimpy",
+    },
+    {
+      title: "MemeNöme",
+      description:
+        "The official website for a meme-based cryptocurrency and its ecosystem.",
+      url: "https://www.memenome.com/",
+    },
+    {
       title: "Tom Scott's newsletter",
       description: "A weekly newsletter from Tom Scott",
       url: "https://www.tomscott.com/newsletter/",
@@ -3567,7 +3796,8 @@ export const resources = {
     },
     {
       title: "MDE Community",
-      description: "Online community hub for MDE enthusiasts and projects.",
+      description:
+        "Online community hub for social events in Medellín, Colombia",
       url: "https://www.mdecommunity.com/",
     },
     {
@@ -3847,6 +4077,114 @@ export const resources = {
   ],
   history: [
     {
+      title: "Novgorod Republic",
+      description:
+        "Wikipedia article on the medieval state that existed from the 12th to 15th centuries in northern Russia.",
+      url: "https://en.wikipedia.org/wiki/Novgorod_Republic",
+    },
+    {
+      title: "Brazilians in Japan",
+      description:
+        "Wikipedia article about the significant community of Brazilians of Japanese descent living in Japan.",
+      url: "https://en.wikipedia.org/wiki/Brazilians_in_Japan",
+    },
+    {
+      title: "Mali Empire",
+      description:
+        "Wikipedia article on the West African empire that flourished from c. 1226 to 1610.",
+      url: "https://en.wikipedia.org/wiki/Mali_Empire",
+    },
+    {
+      title: "Green Ukraine",
+      description:
+        "Wikipedia article about the historical Ukrainian name for a region in the Russian Far East with a significant Ukrainian population.",
+      url: "https://en.wikipedia.org/wiki/Green_Ukraine",
+    },
+    {
+      title: "Government reform of Peter the Great",
+      description:
+        "Wikipedia article about the sweeping reforms introduced by Peter the Great to modernize Russia.",
+      url: "https://en.wikipedia.org/wiki/Government_reform_of_Peter_the_Great",
+    },
+    {
+      title: "Fortifications of the Russian invasion of Ukraine",
+      description:
+        "Wikipedia article detailing the extensive fortifications built by both sides during the Russian invasion of Ukraine.",
+      url: "https://en.wikipedia.org/wiki/Fortifications_of_the_Russian_invasion_of_Ukraine",
+    },
+    {
+      title: "Persepolis",
+      description:
+        "Wikipedia article on the ceremonial capital of the Achaemenid Empire.",
+      url: "https://en.wikipedia.org/wiki/Persepolis",
+    },
+    {
+      title: "Etruscan alphabet",
+      description:
+        "Wikipedia article about the ancient script used by the Etruscans in central and northern Italy.",
+      url: "https://en.wikipedia.org/wiki/Etruscan_alphabet",
+    },
+    {
+      title: "December 2001 crisis in Argentina",
+      description:
+        "A Spanish Wikipedia article detailing the political and economic crisis in Argentina in December 2001.",
+      url: "https://es.wikipedia.org/wiki/Crisis_de_diciembre_de_2001_en_Argentina",
+    },
+    {
+      title: "Karelian question",
+      description:
+        "Wikipedia article explaining the political dispute in Finland regarding territories ceded to the Soviet Union.",
+      url: "https://en.wikipedia.org/wiki/Karelian_question",
+    },
+    {
+      title: "Balcerowicz Plan",
+      description:
+        "Wikipedia article on the 'Shock Therapy' economic plan implemented in Poland to transition to a market economy.",
+      url: "https://en.wikipedia.org/wiki/Balcerowicz_Plan",
+    },
+    {
+      title: "History of Tajikistan",
+      description:
+        "Wikipedia article covering the history of the land and people of Tajikistan.",
+      url: "https://en.wikipedia.org/wiki/History_of_Tajikistan",
+    },
+    {
+      title: "Muslim conquest of the Maghreb",
+      description:
+        "Wikipedia article detailing the Arab conquest of North Africa in the 7th century.",
+      url: "https://en.wikipedia.org/wiki/Muslim_conquest_of_the_Maghreb",
+    },
+    {
+      title: "Monroe Doctrine",
+      description:
+        "Wikipedia article about the United States foreign policy doctrine opposing European colonialism in the Western Hemisphere.",
+      url: "https://en.wikipedia.org/wiki/Monroe_Doctrine",
+    },
+    {
+      title: "French Algeria",
+      description:
+        "A French Wikipedia article about the period of French colonization in Algeria.",
+      url: "https://fr.wikipedia.org/wiki/Alg%C3%A9rie_fran%C3%A7aise",
+    },
+    {
+      title: "Harlem Renaissance",
+      description:
+        "Wikipedia article about the intellectual and cultural revival of African American music, dance, art, fashion, literature, and politics in the 1920s.",
+      url: "https://en.wikipedia.org/wiki/Harlem_Renaissance",
+    },
+    {
+      title: "USS Los Angeles (ZR-3)",
+      description:
+        "Wikipedia article about the rigid airship built in Germany as war reparations and operated by the US Navy.",
+      url: "https://en.m.wikipedia.org/wiki/USS_Los_Angeles_(ZR-3)",
+    },
+    {
+      title: "Bulgaria and the euro",
+      description:
+        "Wikipedia article concerning Bulgaria's adoption of the euro as its currency.",
+      url: "https://en.wikipedia.org/wiki/Bulgaria_and_the_euro",
+    },
+    {
       title: "Soviet children's book on the CCCP (1950s)",
       description:
         "Digitized Soviet-era children's pop-up book from 1950s Russia archived on Internet Archive.",
@@ -4120,6 +4458,12 @@ export const resources = {
   ],
   business: [
     {
+      title: "Ford CEO on China's EV Progress",
+      description:
+        "An article detailing Ford CEO Jim Farley's humbling experience observing the advancements of the Chinese EV market.",
+      url: "https://www.businessinsider.com/ford-ceo-china-ev-progress-most-humbling-thing-ever-seen-2025-6",
+    },
+    {
       title: "Lidl, the German supermarket chain",
       description:
         "German supermarket chain focused on low prices through limited assortment and private labels.",
@@ -4203,6 +4547,65 @@ export const resources = {
     },
   ],
   geography: [
+    {
+      title: "Qingdao",
+      description:
+        "Wikipedia article on the major port city in the eastern Shandong province of China.",
+      url: "https://en.wikipedia.org/wiki/Qingdao",
+    },
+    {
+      title: "Grand Ethiopian Renaissance Dam",
+      description:
+        "Wikipedia article on the large hydroelectric dam on the Blue Nile River in Ethiopia.",
+      url: "https://en.wikipedia.org/wiki/Grand_Ethiopian_Renaissance_Dam",
+    },
+    {
+      title: "Migingo Island",
+      description:
+        "Wikipedia article on the small, densely populated island in Lake Victoria, subject to a territorial dispute between Kenya and Uganda.",
+      url: "https://en.wikipedia.org/wiki/Migingo_Island",
+    },
+    {
+      title: "Užupis",
+      description:
+        "Wikipedia article about the neighborhood in Vilnius, Lithuania, which declared itself an independent republic.",
+      url: "https://en.wikipedia.org/wiki/U%C5%BEupis",
+    },
+    {
+      title: "Dune of Pilat",
+      description:
+        "Wikipedia article about the tallest sand dune in Europe, located in France.",
+      url: "https://en.wikipedia.org/wiki/Dune_of_Pilat",
+    },
+    {
+      title: "Geographical distribution of French speakers",
+      description:
+        "A Wikipedia page detailing the global community of French-speaking peoples.",
+      url: "https://en.wikipedia.org/wiki/Geographical_distribution_of_French_speakers",
+    },
+    {
+      title: "Buryatia",
+      description:
+        "Wikipedia article on the Russian republic of Buryatia, located in Siberia.",
+      url: "https://en.wikipedia.org/wiki/Buryatia",
+    },
+    {
+      title: "Food Waste by Country",
+      description: "A ranking of countries based on their total food waste.",
+      url: "https://worldpopulationreview.com/country-rankings/food-waste-by-country",
+    },
+    {
+      title: "European Kazakhstan",
+      description:
+        "Wikipedia article about Kazakhstan, a transcontinental country in Central Asia and Eastern Europe.",
+      url: "https://en.wikipedia.org/wiki/European_Kazakhstan",
+    },
+    {
+      title: "Republic of Vevčani",
+      description:
+        "Wikipedia article about the self-proclaimed micronation within North Macedonia.",
+      url: "https://en.wikipedia.org/wiki/Republic_of_Vev%C4%8Dani",
+    },
     {
       title: "Pamir Mountains are the roof of the world",
       description:
@@ -4332,6 +4735,48 @@ export const resources = {
     },
   ],
   technology: [
+    {
+      title: "Goodpods",
+      description:
+        "A podcast app and discovery platform focused on social recommendations from friends.",
+      url: "https://goodpods.com/",
+    },
+    {
+      title: "Ice",
+      description:
+        "A menu bar manager for macOS that allows you to hide and organize menu bar items.",
+      url: "https://icemenubar.app/",
+    },
+    {
+      title: "TV Garden",
+      description:
+        "A video player that allows users to watch global and live TV online using their own streaming links.",
+      url: "https://tv.garden/",
+    },
+    {
+      title: "DisplaySpecifications",
+      description:
+        "A comprehensive database of specifications for monitors and TVs.",
+      url: "https://www.displayspecifications.com/en",
+    },
+    {
+      title: "Google Labs",
+      description:
+        "A platform to test and provide feedback on early-stage Google Search experiments.",
+      url: "https://labs.google/",
+    },
+    {
+      title: "Wikipedia: Signs of AI writing",
+      description:
+        "A Wikipedia page discussing the signs of AI writing on the platform.",
+      url: "https://en.m.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing",
+    },
+    {
+      title: "Mystery",
+      description:
+        "A tool from Knight Lab to help journalists analyze social network data.",
+      url: "https://mystery.knightlab.com/",
+    },
     {
       title: "Asus shifts production",
       description:
@@ -4793,8 +5238,7 @@ export const resources = {
     },
     {
       title: "Zach Star Himself",
-      description:
-        "Short satire videos",
+      description: "Short satire videos",
       url: "https://www.youtube.com/@ZachStarHimself",
     },
     {
@@ -4817,17 +5261,20 @@ export const resources = {
     },
     {
       title: "Lateral with Tom Scott",
-      description: "Comedy panel game podcast about weird questions with wonderful answers",
+      description:
+        "Comedy panel game podcast about weird questions with wonderful answers",
       url: "https://lateralcast.com/",
     },
     {
       title: "Waveform",
-      description: "A podcast run by the MKBHD team about technology and a bit of everything else",
+      description:
+        "A podcast run by the MKBHD team about technology and a bit of everything else",
       url: "https://podcasts.voxmedia.com/show/waveform-the-mkbhd-podcast",
     },
     {
       title: "Let's Learn Everything",
-      description: "A fun podcast about learning everything, with no specific topic",
+      description:
+        "A fun podcast about learning everything, with no specific topic",
       url: "https://pod.link/1587816694",
     },
     {
@@ -4837,12 +5284,14 @@ export const resources = {
     },
     {
       title: "Wisdom From The Top with Guy Raz",
-      description: "A podcast with interviews top leaders about their struggles, failures, and successes to uncover lessons in leadership and business.",
+      description:
+        "A podcast with interviews top leaders about their struggles, failures, and successes to uncover lessons in leadership and business.",
       url: "https://pod.link/1460154838",
     },
     {
       title: "ACQ2",
-      description: "A spin-off of Acquired, with smaller episodes and interviews",
+      description:
+        "A spin-off of Acquired, with smaller episodes and interviews",
       url: "https://pod.link/acquiredlp",
     },
     {
