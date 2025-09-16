@@ -15,6 +15,7 @@ import {
   CTASection,
 } from "@/components/about";
 
+
 export default function AboutPage() {
   return (
     <main className="flex flex-col min-h-screen bg-background">

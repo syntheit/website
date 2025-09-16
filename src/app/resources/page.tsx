@@ -12,6 +12,7 @@ import { ResourceGrid } from "@/components/ui/resource-grid";
 import { ResourceHero } from "@/components/ui/resource-hero";
 import { useResources } from "@/hooks/use-resources";
 
+
 export default function ResourcesPage() {
   const {
     activeTab,

@@ -11,6 +11,7 @@ import Link from "next/link";
 import { projects } from "../metadata/projects";
 import { calculateProjectStats } from "@/lib/project-utils";
 
+
 export default function ProjectsPage() {
   const stats = calculateProjectStats(projects);
   const featuredProjects = projects.filter(p => p.featured);

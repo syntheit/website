@@ -28,6 +28,7 @@ interface Photo {
   };
 }
 
+
 export default function PhotographyPage() {
   const [selectedCategory, setSelectedCategory] = useState("favorites");
   const [shuffledPhotos, setShuffledPhotos] = useState<Photo[]>([]);
@@ -112,8 +113,9 @@ export default function PhotographyPage() {
     setShowRandomResult(false);
     setRandomPhoto(null);
     
-    const randomIndex = Math.floor(Math.random() * shuffledPhotos.length);
-    const selectedPhoto = shuffledPhotos[randomIndex];
+    // Use entire photos collection instead of filtered shuffledPhotos
+    const randomIndex = Math.floor(Math.random() * photos.length);
+    const selectedPhoto = photos[randomIndex];
     
     // Random animation duration between 1-3 seconds
     const animationDuration = Math.random() * 2000 + 1000; // 1000-3000ms

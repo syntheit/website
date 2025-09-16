@@ -14,6 +14,7 @@ import { CountryList } from "@/components/travel/CountryList";
 import { FutureAdventures } from "@/components/travel/FutureAdventures";
 import { ContactCTA } from "@/components/travel/ContactCTA";
 
+
 export default function TravelPage() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
