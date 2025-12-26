@@ -101,7 +101,7 @@ export default function HomePage() {
                     external
                   />
                   <LinkButton
-                    href="https://glass.photo/matv"
+                    href="https://www.pexels.com/@daniel-miller-2106839"
                     icon={Camera}
                     text="Photos"
                     iconBgColor="bg-purple-500/10"
