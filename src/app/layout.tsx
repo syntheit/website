@@ -2,8 +2,8 @@ import "@/styles/globals.css"
 
 import { Lora } from "next/font/google";
 import { type Metadata, type Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Providers } from "./providers";
-import PlausibleProvider from 'next-plausible';
 
 const description = "Software engineer, photographer, and entrepreneur living in Buenos Aires";
 
@@ -60,14 +60,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={lora.variable}>
       <body className="font-lora">
-        <PlausibleProvider 
-          domain="matv.io"
-          customDomain="https://analytics.matv.io"
-          selfHosted={true}
-        >
-          <Providers>{children}</Providers>
-        </PlausibleProvider>
+        <Providers>{children}</Providers>
       </body>
+      <GoogleAnalytics gaId="G-9FKNZK7LRN" />
     </html>
   );
 }
