@@ -60,6 +60,30 @@ const continentMapping: Record<string, string> = {
   
   // Caribbean
   "JM": "Caribbean",
+
+  // Africa
+  "RW": "Africa",
+  "KE": "Africa",
+  "TZ": "Africa",
+  "NA": "Africa",
+  "BW": "Africa",
+  "ZA": "Africa",
+  "ZW": "Africa",
+  "MA": "Africa",
+  "TN": "Africa",
+  "DZ": "Africa",
+
+  // Additional Europe
+  "GE": "Europe",
+  "BA": "Europe",
+  "PT": "Europe",
+  "IE": "Europe",
+
+  // Additional Asia
+  "OM": "Asia",
+  "KR": "Asia",
+  "IR": "Asia",
+  "TR": "Asia",
 };
 
 // Helper function to get continent for a country
@@ -117,9 +141,6 @@ export const nextYearCountries: CountryCategory[] = [
   { code: "CO", name: "Colombia" },
   { code: "PE", name: "Peru" },
   { code: "EC", name: "Ecuador" },
-  { code: "IN", name: "India" },
-  { code: "NP", name: "Nepal" },
-  { code: "BT", name: "Bhutan" },
 ];
 
 export const followingYearCountries: CountryCategory[] = [
@@ -133,6 +154,24 @@ export const followingYearCountries: CountryCategory[] = [
   { code: "UZ", name: "Uzbekistan" },
   { code: "TM", name: "Turkmenistan" },
   { code: "AZ", name: "Azerbaijan" },
+  { code: "GE", name: "Georgia" },
+  { code: "BA", name: "Bosnia and Herzegovina" },
+  { code: "PT", name: "Portugal" },
+  { code: "IE", name: "Ireland" },
+  { code: "OM", name: "Oman" },
+  { code: "RW", name: "Rwanda" },
+  { code: "KE", name: "Kenya" },
+  { code: "TZ", name: "Tanzania" },
+  { code: "NA", name: "Namibia" },
+  { code: "BW", name: "Botswana" },
+  { code: "ZA", name: "South Africa" },
+  { code: "ZW", name: "Zimbabwe" },
+  { code: "KR", name: "South Korea" },
+  { code: "IR", name: "Iran" },
+  { code: "TR", name: "Turkey" },
+  { code: "MA", name: "Morocco" },
+  { code: "TN", name: "Tunisia" },
+  { code: "DZ", name: "Algeria" },
 ];
 
 export const allPlannedCountries = [
