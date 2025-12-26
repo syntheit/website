@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { ContactModal } from "@/components/ui/contact-modal";
-import { ArrowLeft, Globe } from "lucide-react";
+import { Globe } from "lucide-react";
 import Link from "next/link";
 
 import { visitedCountries, nextYearCountries, followingYearCountries } from "@/app/metadata/countries";
@@ -22,14 +22,6 @@ export default function TravelPage() {
     <main className="flex flex-col min-h-screen bg-background">
       <Navbar />
 
-      <div className="px-4 pb-6 sm:px-8 md:px-12">
-        <Link href="/">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
 
       <div className="flex-1 px-4 pb-12 sm:px-8 md:px-12">
         <div className="mx-auto space-y-12 max-w-7xl">
@@ -67,13 +59,13 @@ export default function TravelPage() {
                 count={visitedCountries.length}
               />
               <CountryList 
-                title="Within Next Year"
+                title="Near Future"
                 countries={nextYearCountries}
                 color="hsl(142, 76%, 65%)"
                 count={nextYearCountries.length}
               />
               <CountryList 
-                title="Following Year"
+                title="At Some Point"
                 countries={followingYearCountries}
                 color="hsl(210, 83%, 65%)"
                 count={followingYearCountries.length}

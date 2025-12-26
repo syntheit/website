@@ -25,13 +25,13 @@ const travelFacts = [
   },
   {
     question: "Most overrated city",
-    answer: "Chicago, Illinois",
+    answer: "Dallas, TX",
     icon: MapPin,
     color: "text-red-700 dark:text-red-400",
     bgColor: "bg-red-100 dark:bg-red-900/30"
   },
   {
-    question: "Best Chinese food",
+    question: "Best food",
     answer: "Ciudad del Este, Paraguay",
     icon: Star,
     color: "text-green-700 dark:text-green-400",

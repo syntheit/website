@@ -24,11 +24,11 @@ export function WorldMap() {
         </div>
         <div className="flex gap-2 items-center">
           <div className="w-4 h-4 rounded" style={{ backgroundColor: "hsl(142, 76%, 65%)" }}></div>
-          <span className="text-muted-foreground">Within the Next Year</span>
+          <span className="text-muted-foreground">Near Future</span>
         </div>
         <div className="flex gap-2 items-center">
           <div className="w-4 h-4 rounded" style={{ backgroundColor: "hsl(210, 83%, 65%)" }}></div>
-          <span className="text-muted-foreground">Following Year</span>
+          <span className="text-muted-foreground">At Some Point</span>
         </div>
       </div>
 
