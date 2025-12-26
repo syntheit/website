@@ -54,12 +54,39 @@ export const languages: Language[] = [
     name: "English",
     nativeName: "English",
     level: "Native",
-    years: 21,
+    years: 22,
     description: "My native language used daily for work, communication, and media consumption.",
     flag: "🇺🇸",
     proficiency: 100,
     goals: [],
     resources: []
+  },
+  {
+    name: "Spanish",
+    nativeName: "Español",
+    level: "Advanced",
+    delfLevel: "B2",
+    years: 1,
+    description: "I'm currently living in Argentina, learning rapidly. I can hold conversations, read literature, and work professionally.",
+    flag: "🇦🇷",
+    proficiency: getDelfProficiency("B2"),
+    goals: ["Reach C1 level", "Improve pronunciation"],
+    resources: [
+      {
+        name: "Duolingo Spanish",
+        type: "App",
+        url: "https://www.duolingo.com/course/es/en/Learn-Spanish",
+        description: "Daily practice and vocabulary building",
+        icon: BookOpen
+      },
+      {
+        name: "SpanishPod101",
+        type: "Podcast",
+        url: "https://www.spanishpod101.com/",
+        description: "Audio lessons for all levels",
+        icon: Headphones
+      }
+    ]
   },
   {
     name: "French",
@@ -88,38 +115,11 @@ export const languages: Language[] = [
     ]
   },
   {
-    name: "Spanish",
-    nativeName: "Español",
-    level: "Advanced",
-    delfLevel: "B1",
-    years: 0.58,
-    description: "I'm currently living in Argentina, learning rapidly. I can hold conversations, read literature, and work professionally.",
-    flag: "🇦🇷",
-    proficiency: getDelfProficiency("B1"),
-    goals: ["Reach C1 level", "Expand verb tense knowledge"],
-    resources: [
-      {
-        name: "Duolingo Spanish",
-        type: "App",
-        url: "https://www.duolingo.com/course/es/en/Learn-Spanish",
-        description: "Daily practice and vocabulary building",
-        icon: BookOpen
-      },
-      {
-        name: "SpanishPod101",
-        type: "Podcast",
-        url: "https://www.spanishpod101.com/",
-        description: "Audio lessons for all levels",
-        icon: Headphones
-      }
-    ]
-  },
-  {
     name: "Ukrainian",
     nativeName: "Українська",
     level: "Beginner",
     delfLevel: "A2",
-    years: 17,
+    years: 21,
     description: "I have Ukrainian family background, known since childhood. I'm familiar at intuitive level, need advancement.",
     flag: "🇺🇦",
     proficiency: getDelfProficiency("A2"),
@@ -145,11 +145,11 @@ export const languages: Language[] = [
     name: "Russian",
     nativeName: "Русский",
     level: "Beginner",
-    delfLevel: "A2",
-    years: 0.25,
+    delfLevel: "B1",
+    years: 0.75,
     description: "I have Ukrainian family background, known since childhood. My Ukrainian knowledge aids learning, I'm familiar with vocabulary.",
     flag: "🇷🇺",
-    proficiency: getDelfProficiency("A2"),
+    proficiency: getDelfProficiency("B1"),
     goals: ["Learn more vocab and verbs", "Read more"],
     resources: [
       {
@@ -171,12 +171,12 @@ export const languages: Language[] = [
     name: "Portuguese",
     nativeName: "Português",
     level: "Beginner",
-    delfLevel: "A1",
-    years: 0.17,
+    delfLevel: "B1",
+    years: 0.5,
     description: "I love traveling to Brazil and the Brazilian Portuguese accent. My Spanish similarity provides learning advantage.",
     flag: "🇧🇷",
-    proficiency: getDelfProficiency("A1"),
-    goals: ["Aim for B1 by end of year", "Learn most common verbs in past/present/future", "Learn common nouns"],
+    proficiency: getDelfProficiency("B1"),
+    goals: ["Reach B2 by end of 2025", "Learn more Brazilian slang"],
     resources: [
       {
         name: "Duolingo Portuguese",
@@ -203,6 +203,13 @@ export const languageLearningResources: LanguageLearningResource[] = [
     url: "https://www.youtube.com/@Thelinguist",
     icon: MessageSquare,
     action_text: "Visit Channel"
+  },
+  {
+    name: "Preply",
+    description: "Connect with professional language tutors for personalized one-on-one lessons. Find native speakers and certified teachers for any language at flexible times.",
+    url: "https://preply.com/",
+    icon: MessageSquare,
+    action_text: "Find Tutors"
   }
 ];
 
@@ -240,13 +247,13 @@ export const learningStrategy = {
 
 export const futureGoals = {
   shortTerm: [
-    "Reach B2/C1 level in Spanish",
+    "Reach fluency in Spanish",
     "Master Cyrillic alphabet (Ukrainian/Russian)",
-    "Basic conversation skills in Portuguese"
+    "Be able to understand a Brazilian Portuguese movie or TV show"
   ],
   longTerm: [
-    "Reach C1 level in Ukrainian and Russian",
-    "Reach B2 level in Portuguese",
-    "Begin learning an Asian language (likely Vietnamese)"
+    "Reach at least B2/C1 in all of the languages I currently know",
+    "Learn another language or two within the Romance or Slavic family (Italian, Catalan, Polish)",
+    "Begin learning Chinese"
   ]
 };
