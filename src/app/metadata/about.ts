@@ -13,11 +13,11 @@ export const ABOUT_DATA = {
 
   languages: [
     { name: "English", level: "Native" },
-    { name: "Spanish", level: "B1" },
+    { name: "Spanish", level: "B2" },
     { name: "French", level: "B2" },
     { name: "Ukrainian", level: "A2" },
-    { name: "Russian", level: "A2" },
-    { name: "Portuguese", level: "A1" },
+    { name: "Russian", level: "B1" },
+    { name: "Portuguese", level: "B1" },
   ],
 
   interestsList: [
@@ -39,7 +39,7 @@ export const ABOUT_DATA = {
   ],
 
   story: [
-    "I'm an open-minded individual always looking for something new to explore—whether that's a country, a language, or an idea worth building. I like to move fast, stay curious, and immerse myself deeply in whatever I'm doing.",
+    "I'm an open-minded individual always looking for something new to explore, whether that's a country, a language, or an idea worth building. I like to move fast, stay curious, and immerse myself deeply in whatever I'm doing.",
     "I work as a programmer and am in the early stages of building businesses here in Argentina. My days are a mix of coding, learning, meeting interesting people, and making things happen.",
     "Outside of work, I run (I'm aiming for a marathon by the end of the year), take photos wherever I go, and keep chipping away at new languages. I'm always chasing the next challenge, and I plan to keep it that way.",
   ],
@@ -87,7 +87,7 @@ export const ABOUT_DATA = {
       icon: "Mountain",
       title: "Rock Climbing",
       description:
-        "I see rock climbing as physical puzzle solving—it's the perfect intersection of mental and physical challenge.",
+        "I see rock climbing as physical puzzle solving, it's the perfect intersection of mental and physical challenge.",
     },
     {
       icon: "Languages",
@@ -106,13 +106,12 @@ export const ABOUT_DATA = {
 
   experience: [
     {
-      title: "Lead Developer",
-      company: "GerminaAI",
-      period: "Jun 2025 - Present",
+      title: "Full-stack Developer",
+      company: "New Reach",
+      period: "Dec 2025 - Present",
       description:
-        "Designing and developing a mobile-first platform to connect small investors with global startups.",
-      technologies: ["React.js", "tRPC", "Postgres", "Docker", "TypeScript", "DevOps"],
-      isCurrent: true,
+        "Develop and enhance features for web applications with a focus on user interface design and user experience.",
+      technologies: ["React", "Next.js", "TypeScript", "Tailwind"],
     },
     {
       title: "Full-stack Developer",
@@ -172,8 +171,8 @@ export const ABOUT_DATA = {
       ],
     },
     services: {
-      fileMedia: ["Nextcloud", "Immich", "Jellyfin", "Syncthing", "Tube Archivist"],
-      productivitySecurity: ["Bitwarden", "Linkding", "Memos"],
+      fileMedia: ["Nextcloud", "Immich", "Jellyfin", "Syncthing"],
+      productivitySecurity: ["Bitwarden", "Linkding", "Memos", "Retrospend"],
       operatingSystem: "NixOS",
     },
     description: [
@@ -181,6 +180,65 @@ export const ABOUT_DATA = {
       "The setup uses ZFS for reliable storage with mirrored NVMe drives for the operating system and a large storage pool for media and data. NixOS provides a declarative approach to system configuration, making the entire infrastructure reproducible and maintainable.",
     ],
   },
+
+  quotes: [
+    { text: "You are the steps you take", author: "Yes" },
+    {
+      text: "Every action you take is a vote for the type of person you wish to become.",
+      author: "Atomic Habits",
+    },
+    { text: "Fortune favors the bold", author: null },
+    {
+      text: "You're under no obligation to be the same person you were 5 minutes ago.",
+      author: "Alan Watts",
+    },
+    {
+      text: "One man's terrorist is another man's freedom fighter",
+      author: null,
+    },
+    {
+      text: "If you had to live this exact life over and over for eternity, would you be proud of how you lived it?",
+      author: "Nietzsche",
+    },
+    {
+      text: "It is not that we have a short time to live, but that we waste a lot of it.",
+      author: "Seneca",
+    },
+    { text: "Awkwardness is temporary, regret is permanent", author: null },
+    { text: "Variety is the spice of life", author: "Alan Watts" },
+    { text: "If you don't try, nothing will change", author: null },
+    {
+      text: "If you get on the wrong train, get off at the next station",
+      author: null,
+    },
+    {
+      text: "The mass of men lead lives of quiet desperation",
+      author: "Henry David Thoreau",
+    },
+    { text: "Ask for advice, not favors", author: null },
+    {
+      text: "There are decades where nothing happens; and there are weeks where decades happen",
+      author: "Vladimir Lenin",
+    },
+    {
+      text: "Most of what slows things down is taking too long to make decisions",
+      author: "Jeff Bezos",
+    },
+    { text: "Be sincere, not serious", author: "Alan Watts" },
+    {
+      text: "Of all men's miseries the bitterest is this: to know so much and to have control over nothing.",
+      author: "Herodotus",
+    },
+    { text: "Uncertainty isn't the enemy", author: null },
+    {
+      text: "People do not seem to realize that their opinion of the world is also a confession of their character",
+      author: "Ralph Waldo Emerson",
+    },
+    {
+      text: "We must all suffer one of two pains: the pain of discipline or the pain of regret",
+      author: "Jim Rohn",
+    },
+  ],
 
   cta: {
     title: "Let's Work Together",
