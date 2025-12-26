@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
-import { Home, Search, MapPin } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 import Link from "next/link";
 
 export default function NotFound() {
@@ -30,19 +30,7 @@ export default function NotFound() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid gap-6 md:grid-cols-3">
-            <div className="p-6 space-y-3 rounded-2xl border border-border bg-card">
-              <div className="flex gap-3 items-center">
-                <Home className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold text-foreground">Go Home</h3>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Return to the main page and explore from there.
-              </p>
-              <Button className="w-full" asChild>
-                <Link href="/">Back to Home</Link>
-              </Button>
-            </div>
+          <div className="grid gap-6 md:grid-cols-2">
 
             <div className="p-6 space-y-3 rounded-2xl border border-border bg-card">
               <div className="flex gap-3 items-center">

@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { SuggestResourceButton } from "@/components/ui/suggest-resource-button";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { RandomResourceSelector } from "@/components/ui/random-resource-selector";
 import { ResourceTabs } from "@/components/ui/resource-tabs";
@@ -33,15 +32,6 @@ export default function ResourcesPage() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Back Button */}
-      <div className="px-4 pb-6 sm:px-8 md:px-12">
-        <Link href="/">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
 
       {/* Main Content */}
       <div className="flex-1 px-4 pb-12 sm:px-8 md:px-12">

@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { ContactModal } from "@/components/ui/contact-modal";
 import {
-  ArrowLeft,
   BookOpen,
   Brain,
   Star,
@@ -32,15 +31,6 @@ export default function LanguagesPage() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Back Button */}
-      <div className="px-4 pb-6 sm:px-8 md:px-12">
-        <Link href="/">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
 
       {/* Main Content */}
       <div className="flex-1 px-4 pb-12 sm:px-8 md:px-12">

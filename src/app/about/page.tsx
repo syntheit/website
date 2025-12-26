@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
-import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ABOUT_DATA } from "@/app/metadata/about";
 import {
@@ -12,6 +11,7 @@ import {
   SkillsSection,
   ExperienceSection,
   InfrastructureSection,
+  QuotesSection,
   CTASection,
 } from "@/components/about";
 
@@ -22,15 +22,6 @@ export default function AboutPage() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Back Button */}
-      <div className="px-4 pb-6 sm:px-8 md:px-12">
-        <Link href="/">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
 
       {/* Main Content */}
       <div className="flex-1 px-4 pb-12 sm:px-8 md:px-12">
@@ -66,6 +57,9 @@ export default function AboutPage() {
             services={ABOUT_DATA.infrastructure.services}
             description={ABOUT_DATA.infrastructure.description}
           />
+
+          {/* Favorite Quotes */}
+          <QuotesSection quotes={ABOUT_DATA.quotes} />
 
           {/* CTA Section */}
           <CTASection
