@@ -1,4 +1,4 @@
-import { User, Camera, Code, Plane, Gamepad2, BookOpen, Languages } from "lucide-react";
+import { User, Code, Plane, Gamepad2, BookOpen, Languages } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface NavItem {
@@ -11,7 +11,6 @@ export const siteConfig = {
   title: "Daniel Miller",
   navItems: [
     { href: "/about", label: "About", icon: User },
-    { href: "/photography", label: "Photography", icon: Camera },
     { href: "/projects", label: "Projects & Apps", icon: Code },
     { href: "/travel", label: "Travel", icon: Plane },
     { href: "/minigames", label: "Minigames", icon: Gamepad2 },

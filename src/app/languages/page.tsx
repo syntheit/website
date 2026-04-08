@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { ContactModal } from "@/components/ui/contact-modal";
+import { Button } from "@/components/ui/button";
 import {
   BookOpen,
   Brain,
@@ -12,7 +12,6 @@ import {
   MessageSquare,
   Target,
 } from "lucide-react";
-import Link from "next/link";
 import { LanguageCard } from "@/components/languages/LanguageCard";
 import { StrategyCard } from "@/components/languages/StrategyCard";
 import { GoalsCard } from "@/components/languages/GoalsCard";
@@ -181,7 +180,6 @@ export default function LanguagesPage() {
         </div>
       </div>
 
-      {/* Contact Modal */}
       <ContactModal
         isOpen={isContactModalOpen}
         onClose={() => setIsContactModalOpen(false)}

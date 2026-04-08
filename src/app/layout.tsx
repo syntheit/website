@@ -3,7 +3,6 @@ import "@/styles/globals.css"
 import { Lora } from "next/font/google";
 import { type Metadata, type Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Providers } from "./providers";
 
 const description = "Software engineer, photographer, and entrepreneur living in Buenos Aires";
 
@@ -60,7 +59,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={lora.variable}>
       <body className="font-lora">
-        <Providers>{children}</Providers>
+        {children}
       </body>
       <GoogleAnalytics gaId="G-9FKNZK7LRN" />
     </html>

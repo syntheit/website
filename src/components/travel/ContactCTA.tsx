@@ -10,12 +10,12 @@ export function ContactCTA({ onContactClick }: ContactCTAProps) {
     <div className="p-8 space-y-6 text-center bg-gradient-to-br rounded-3xl from-primary/5 to-accent/10">
       <h2 className="text-2xl font-bold text-foreground">Get in Touch</h2>
       <p className="mx-auto max-w-md text-muted-foreground">
-        Always open to travel recommendations, photography tips, and connecting with fellow adventurers. 
+        Always open to travel recommendations and connecting with fellow adventurers.
         Have a destination in mind? Let&apos;s talk about it!
       </p>
       <div className="flex gap-4 justify-center">
-        <Button 
-          size="lg" 
+        <Button
+          size="lg"
           className="bg-primary text-primary-foreground hover:bg-primary/90"
           onClick={onContactClick}
         >

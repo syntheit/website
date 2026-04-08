@@ -1,11 +1,9 @@
 import type { CarouselItem } from "@/components/ui/carousel";
-import { 
-  Languages, 
-  Camera, 
-  Plane, 
-  BookOpen, 
-  Code, 
-  Palette,
+import {
+  Languages,
+  Plane,
+  BookOpen,
+  Code,
   MapPin,
   Globe,
   FileText
@@ -30,14 +28,6 @@ export const carouselItems: CarouselItem[] = [
     icon: Plane,
   },
   {
-    id: "jujuy-photos",
-    title: "Photos from Jujuy",
-    description: "Capturing the stunning landscapes and vibrant culture of Argentina's northern province. From colorful mountains to ancient ruins.",
-    href: "/photography",
-    category: "Photography",
-    icon: Camera,
-  },
-  {
     id: "projects",
     title: "Projects & Work",
     description: "Explore my software engineering projects, from full-stack applications to innovative tools and solutions.",
@@ -60,14 +50,6 @@ export const carouselItems: CarouselItem[] = [
     href: "/resources",
     category: "Resources",
     icon: BookOpen,
-  },
-  {
-    id: "photography-portfolio",
-    title: "Photography Portfolio",
-    description: "A showcase of my photography work, featuring landscapes, street photography, and moments captured around the world.",
-    href: "/photography",
-    category: "Art",
-    icon: Palette,
   },
   {
     id: "about",

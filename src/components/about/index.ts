@@ -8,4 +8,5 @@ export { StorySection } from "./StorySection";
 export { SkillsSection } from "./SkillsSection";
 export { ExperienceSection } from "./ExperienceSection";
 export { InfrastructureSection } from "./InfrastructureSection";
+export { QuotesSection } from "./QuotesSection";
 export { CTASection } from "./CTASection";

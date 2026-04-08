@@ -43,7 +43,7 @@ export function Navbar({ className = "" }: NavbarProps) {
             {title}
           </Link>
         </div>
-        
+
         {/* Center: Navigation Items - Hidden on mobile */}
         <div className="hidden lg:flex items-center justify-center gap-6 absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item) => (
@@ -60,7 +60,7 @@ export function Navbar({ className = "" }: NavbarProps) {
             </Link>
           ))}
         </div>
-        
+
         {/* Right: Contact Button and Mobile Menu */}
         <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0 ml-auto">
           {/* Contact Button - Hidden on mobile */}
@@ -69,7 +69,7 @@ export function Navbar({ className = "" }: NavbarProps) {
               Contact
             </Button>
           </div>
-          
+
           {/* Mobile Menu Button */}
           <Button
             variant="ghost"
@@ -132,8 +132,8 @@ export function Navbar({ className = "" }: NavbarProps) {
 
             {/* Mobile Contact Button */}
             <div className="p-4 border-t border-border/20">
-              <Button 
-                variant="default" 
+              <Button
+                variant="default"
                 className="w-full h-12 text-base"
                 onClick={() => {
                   setIsContactModalOpen(true);
@@ -148,10 +148,10 @@ export function Navbar({ className = "" }: NavbarProps) {
       )}
 
       {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </>
   );
-} 
+}

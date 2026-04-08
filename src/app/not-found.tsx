@@ -61,7 +61,6 @@ export default function NotFound() {
               <div className="flex flex-wrap gap-1">
                 {[
                   "About",
-                  "Photography", 
                   "Projects",
                   "Travel",
                   "Minigames",
@@ -89,13 +88,6 @@ export default function NotFound() {
               I promise it&apos;s more interesting than this 404 page.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-                asChild
-              >
-                <Link href="/photography">View Photography</Link>
-              </Button>
               <Button
                 size="lg"
                 variant="outline"

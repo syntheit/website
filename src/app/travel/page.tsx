@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { ContactModal } from "@/components/ui/contact-modal";
 import { Globe } from "lucide-react";
-import Link from "next/link";
 
 import { visitedCountries, nextYearCountries, followingYearCountries } from "@/app/metadata/countries";
 import { TravelFacts } from "@/components/travel/TravelFacts";
@@ -52,19 +50,19 @@ export default function TravelPage() {
             </div>
 
             <div className="grid gap-6 md:grid-cols-3">
-              <CountryList 
+              <CountryList
                 title="Countries Visited"
                 countries={visitedCountries}
                 color="#2a5b46"
                 count={visitedCountries.length}
               />
-              <CountryList 
+              <CountryList
                 title="Near Future"
                 countries={nextYearCountries}
                 color="hsl(142, 76%, 65%)"
                 count={nextYearCountries.length}
               />
-              <CountryList 
+              <CountryList
                 title="At Some Point"
                 countries={followingYearCountries}
                 color="hsl(210, 83%, 65%)"
@@ -79,10 +77,10 @@ export default function TravelPage() {
         </div>
       </div>
 
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </main>
   );
-} 
+}

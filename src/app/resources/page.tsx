@@ -1,9 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
-import { SuggestResourceButton } from "@/components/ui/suggest-resource-button";
-import Link from "next/link";
 import { RandomResourceSelector } from "@/components/ui/random-resource-selector";
 import { ResourceTabs } from "@/components/ui/resource-tabs";
 import { ResourceSearch } from "@/components/ui/resource-search";
@@ -72,15 +69,6 @@ export default function ResourcesPage() {
             <p className="mx-auto max-w-md text-muted-foreground">
               I&apos;m constantly discovering new and interesting websites. This collection will grow over time as I find more cool stuff to share.
             </p>
-            <div className="flex gap-4 justify-center">
-              <SuggestResourceButton 
-                variant="outline"
-                size="lg"
-                className="px-8 py-4"
-              >
-                Suggest a Resource
-              </SuggestResourceButton>
-            </div>
           </div>
         </div>
       </div>
