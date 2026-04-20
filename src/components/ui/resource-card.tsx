@@ -1,4 +1,5 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
 import { ExternalLink, Copy, Check } from "lucide-react";
 import { useState } from "react";
 
@@ -18,12 +19,10 @@ interface ResourceCardProps {
 export function ResourceCard({ resource, className = "" }: ResourceCardProps) {
   const [copied, setCopied] = useState(false);
 
-  // Clean URL for display (remove protocol, www, and trailing slash)
   const getDisplayUrl = (url: string) => {
-    return url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+    return url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
   };
 
-  // Copy URL to clipboard
   const copyToClipboard = async (url: string) => {
     try {
       await navigator.clipboard.writeText(url);
@@ -36,73 +35,61 @@ export function ResourceCard({ resource, className = "" }: ResourceCardProps) {
 
   return (
     <div
-      className={`group overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${className}`}
+      className={`group bg-[#F5EBD9] rounded-2xl border-[1.5px] border-[rgba(59,35,20,0.08)] hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(59,35,20,0.1)] hover:border-[#D4581A] transition-all ${className}`}
     >
-      <div className="flex h-full flex-col p-6">
-        {/* Header */}
-        <div className="space-y-2">
-          <div className="flex items-start justify-between">
-            <h3 className="text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
-              {resource.title}
-            </h3>
-            {resource.featured && (
-              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                Featured
-              </span>
-            )}
-          </div>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            {resource.description}
-          </p>
-        </div>
+      <div className="flex h-full flex-col p-7">
+        {/* Title */}
+        <h3 className="font-serif text-[17px] font-bold mb-[6px]">
+          {resource.title}
+        </h3>
 
-        {/* Category */}
+        {/* Description */}
+        <p className="text-[13px] text-[#7A5C42] leading-[1.6]">
+          {resource.description}
+        </p>
+
+        {/* Category tag */}
         {resource.category && (
-          <div className="flex items-center gap-2 pt-2">
-            <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+          <div className="mt-3">
+            <span className="inline-block text-[11px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold px-2 py-[3px] bg-[rgba(212,88,26,0.08)] rounded">
               {resource.category}
             </span>
           </div>
         )}
 
-        {/* Spacer to push link section to bottom */}
+        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Link section - always at bottom */}
-        <div className="pt-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full transition-colors"
-            asChild
+        {/* URL bar */}
+        <div className="mt-4 pt-3 border-t border-[rgba(59,35,20,0.08)] flex items-center justify-between gap-2">
+          <a
+            href={resource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="truncate text-[12px] text-[#7A5C42] hover:text-[#D4581A] transition-colors"
           >
+            {getDisplayUrl(resource.url)}
+          </a>
+          <div className="flex items-center gap-1 shrink-0">
+            <button
+              onClick={() => copyToClipboard(resource.url)}
+              className="cursor-pointer p-1 text-[#7A5C42] hover:text-[#D4581A] transition-colors rounded"
+            >
+              {copied ? (
+                <Check className="h-3.5 w-3.5 text-green-600" />
+              ) : (
+                <Copy className="h-3.5 w-3.5" />
+              )}
+            </button>
             <a
               href={resource.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-between"
+              className="p-1 text-[#7A5C42] hover:text-[#D4581A] transition-colors"
             >
-              <span className="truncate font-mono text-xs text-muted-foreground text-left">
-                {getDisplayUrl(resource.url)}
-              </span>
-              <div className="flex items-center gap-2 ml-auto">
-                <button
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    await copyToClipboard(resource.url);
-                  }}
-                  className="rounded p-1 transition-colors hover:bg-muted"
-                >
-                  {copied ? (
-                    <Check className="h-4 w-4 text-green-500" />
-                  ) : (
-                    <Copy className="h-4 w-4" />
-                  )}
-                </button>
-                <ExternalLink className="h-4 w-4 flex-shrink-0" />
-              </div>
+              <ExternalLink className="h-3.5 w-3.5" />
             </a>
-          </Button>
+          </div>
         </div>
       </div>
     </div>

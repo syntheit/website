@@ -1,11 +1,7 @@
-export { InfoCard } from "./InfoCard";
-export { SkillTags } from "./SkillTags";
-export { ExperienceCard } from "./ExperienceCard";
-export { SectionHeader } from "./SectionHeader";
 export { HeroSection } from "./HeroSection";
-export { QuickInfoSection } from "./QuickInfoSection";
-export { StorySection } from "./StorySection";
-export { SkillsSection } from "./SkillsSection";
+export { StripeDivider } from "./StripeDivider";
+export { RetrospendShowcase } from "./RetrospendShowcase";
+export { OtherProjects } from "./OtherProjects";
 export { ExperienceSection } from "./ExperienceSection";
-export { InfrastructureSection } from "./InfrastructureSection";
-export { CTASection } from "./CTASection";
+export { WhatImInto } from "./WhatImInto";
+export { QuotesSection } from "./QuotesSection";

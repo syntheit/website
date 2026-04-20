@@ -1,15 +1,26 @@
 import "@/styles/globals.css"
 
-import { Lora } from "next/font/google";
+import { Fraunces, DM_Sans, Space_Mono } from "next/font/google";
 import { type Metadata, type Viewport } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { Providers } from "./providers";
 
 const description = "Software engineer, photographer, and entrepreneur living in Buenos Aires";
 
-const lora = Lora({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-lora",
+  variable: "--font-fraunces",
+  axes: ["opsz"],
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+});
+
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-mono",
 });
 
 export const metadata: Metadata = {
@@ -52,15 +63,15 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export const themeColor = "#65c3ac";
+export const themeColor = "#E8D5B7";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={lora.variable}>
-      <body className="font-lora">
-        <Providers>{children}</Providers>
+    <html lang="en" className={`${fraunces.variable} ${dmSans.variable} ${spaceMono.variable}`}>
+      <body className="font-dm-sans">
+        {children}
       </body>
       <GoogleAnalytics gaId="G-9FKNZK7LRN" />
     </html>

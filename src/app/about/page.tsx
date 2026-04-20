@@ -1,73 +1,60 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
-import Link from "next/link";
 import { ABOUT_DATA } from "@/app/metadata/about";
 import {
   HeroSection,
-  QuickInfoSection,
-  StorySection,
-  SkillsSection,
+  StripeDivider,
+  RetrospendShowcase,
+  OtherProjects,
   ExperienceSection,
-  InfrastructureSection,
+  WhatImInto,
   QuotesSection,
-  CTASection,
 } from "@/components/about";
-
 
 export default function AboutPage() {
   return (
-    <main className="flex flex-col min-h-screen bg-background">
-      {/* Navbar */}
+    <main className="flex min-h-screen flex-col bg-background">
       <Navbar />
 
-
-      {/* Main Content */}
       <div className="flex-1 px-4 pb-12 sm:px-8 md:px-12">
-        <div className="mx-auto space-y-12 max-w-4xl">
-          {/* Hero Section */}
-          <HeroSection
-            name={ABOUT_DATA.hero.name}
-            description={ABOUT_DATA.hero.description}
+        <div className="mx-auto max-w-4xl space-y-12">
+          <HeroSection name={ABOUT_DATA.hero.name} meta={ABOUT_DATA.hero.meta} />
+
+          <StripeDivider />
+
+          <RetrospendShowcase
+            description={ABOUT_DATA.retrospend.description}
+            differentiators={ABOUT_DATA.retrospend.differentiators}
+            tech={ABOUT_DATA.retrospend.tech}
+            links={ABOUT_DATA.retrospend.links}
           />
 
-          {/* Quick Info Cards */}
-          <QuickInfoSection
-            locations={ABOUT_DATA.locations}
-            languages={ABOUT_DATA.languages}
-            interests={ABOUT_DATA.interestsList}
+          <StripeDivider />
+
+          <OtherProjects projects={ABOUT_DATA.projects} />
+
+          <StripeDivider />
+
+          <ExperienceSection
+            experience={ABOUT_DATA.experience}
+            education={ABOUT_DATA.education}
           />
 
-          {/* Story Section */}
-          <StorySection paragraphs={ABOUT_DATA.story} />
+          <StripeDivider />
 
-          {/* Skills & Interests */}
-          <SkillsSection
-            skills={ABOUT_DATA.skills}
-            interests={ABOUT_DATA.interests}
+          <WhatImInto
+            physical={ABOUT_DATA.whatImInto.physical}
+            hardware={ABOUT_DATA.whatImInto.hardware}
+            services={ABOUT_DATA.whatImInto.services}
+            infraDescription={ABOUT_DATA.whatImInto.infraDescription}
           />
 
-          {/* Education & Experience */}
-          <ExperienceSection experience={ABOUT_DATA.experience} />
+          <StripeDivider />
 
-          {/* Server Infrastructure */}
-          <InfrastructureSection
-            hardware={ABOUT_DATA.infrastructure.hardware}
-            services={ABOUT_DATA.infrastructure.services}
-            description={ABOUT_DATA.infrastructure.description}
-          />
-
-          {/* Favorite Quotes */}
           <QuotesSection quotes={ABOUT_DATA.quotes} />
 
-          {/* CTA Section */}
-          <CTASection
-            title={ABOUT_DATA.cta.title}
-            description={ABOUT_DATA.cta.description}
-            buttonText={ABOUT_DATA.cta.buttonText}
-            buttonLink={ABOUT_DATA.cta.buttonLink}
-          />
+          <StripeDivider />
         </div>
       </div>
     </main>

@@ -10,74 +10,76 @@ interface GeoFeature {
 
 export function WorldMap() {
   return (
-    <div className="space-y-6">
-      <div className="space-y-4 text-center">
-        <h2 className="text-2xl font-bold text-foreground">My Travel Map</h2>
-        <p className="mx-auto max-w-2xl text-muted-foreground">
+    <div>
+      <div className="text-center mb-8">
+        <h2 className="font-serif text-[32px] font-extrabold tracking-tight mb-3">
+          My Travel Map
+        </h2>
+        <p className="text-[14px] text-[#7A5C42] max-w-2xl mx-auto leading-[1.7]">
           Click on countries to see where I&apos;ve been and where I&apos;m planning to go next.
         </p>
       </div>
-      <div className="flex flex-wrap gap-6 justify-center text-sm">
+
+      {/* Legend */}
+      <div className="flex flex-wrap gap-6 justify-center mb-6">
         <div className="flex gap-2 items-center">
-          <div className="w-4 h-4 rounded bg-primary"></div>
-          <span className="text-muted-foreground">Visited</span>
+          <div className="w-4 h-4 rounded-[3px]" style={{ backgroundColor: "#3B2314" }} />
+          <span className="text-[13px] text-[#7A5C42]">Visited</span>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="w-4 h-4 rounded" style={{ backgroundColor: "hsl(142, 76%, 65%)" }}></div>
-          <span className="text-muted-foreground">Near Future</span>
+          <div className="w-4 h-4 rounded-[3px]" style={{ backgroundColor: "#D4581A" }} />
+          <span className="text-[13px] text-[#7A5C42]">Near Future</span>
         </div>
         <div className="flex gap-2 items-center">
-          <div className="w-4 h-4 rounded" style={{ backgroundColor: "hsl(210, 83%, 65%)" }}></div>
-          <span className="text-muted-foreground">At Some Point</span>
+          <div className="w-4 h-4 rounded-[3px]" style={{ backgroundColor: "#E8C95A" }} />
+          <span className="text-[13px] text-[#7A5C42]">At Some Point</span>
         </div>
       </div>
 
-      <div className="p-6 rounded-2xl border bg-white border-border shadow-sm">
+      {/* Map Container */}
+      <div className="bg-[#F5EBD9] rounded-[16px] p-6 border-[1.5px] border-[rgba(59,35,20,0.08)]">
         <ComposableMap
           projection="geoEqualEarth"
           projectionConfig={{
             scale: 147,
-            center: [0, 0]
+            center: [0, 0],
           }}
           style={{
             width: "100%",
-            height: "auto"
+            height: "auto",
           }}
         >
-          <Geographies
-            geography="https://unpkg.com/world-atlas@2/countries-110m.json"
-          >
-            {({ geographies }: { geographies: GeoFeature[] }) => {
-              return geographies.map((geo: GeoFeature) => {
+          <Geographies geography="https://unpkg.com/world-atlas@2/countries-110m.json">
+            {({ geographies }: { geographies: GeoFeature[] }) =>
+              geographies.map((geo: GeoFeature) => {
                 const countryName = geo.properties.name;
-                
-                // Determine country color based on category
-                let fillColor = "#e5e7eb";
-                
-                if (visitedCountries.some(c => c.name === countryName)) {
-                  fillColor = "#2a5b46";
-                } else if (nextYearCountries.some(c => c.name === countryName)) {
-                  fillColor = "#86efac";
-                } else if (followingYearCountries.some(c => c.name === countryName)) {
-                  fillColor = "#93c5fd";
+
+                let fillColor = "#D9CFC0";
+
+                if (visitedCountries.some((c) => c.name === countryName)) {
+                  fillColor = "#3B2314";
+                } else if (nextYearCountries.some((c) => c.name === countryName)) {
+                  fillColor = "#D4581A";
+                } else if (followingYearCountries.some((c) => c.name === countryName)) {
+                  fillColor = "#E8C95A";
                 }
-                
+
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
                     fill={fillColor}
-                    stroke="#d1d5db"
+                    stroke="#C8B89A"
                     strokeWidth={0.5}
                     style={{
                       default: { outline: "none" },
                       hover: { outline: "none" },
-                      pressed: { outline: "none" }
+                      pressed: { outline: "none" },
                     }}
                   />
                 );
-              });
-            }}
+              })
+            }
           </Geographies>
         </ComposableMap>
       </div>

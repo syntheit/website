@@ -1,42 +1,41 @@
-import { Mountain, Waves } from "lucide-react";
-
 const adventures = [
   {
     title: "Ushuaia, Argentina",
-    description: "The southernmost city in the world, gateway to Antarctica and Tierra del Fuego National Park.",
-    icon: Mountain
+    description:
+      "The southernmost city in the world, gateway to Antarctica and Tierra del Fuego National Park.",
   },
   {
     title: "Bolivia",
-    description: "Salt flats of Salar de Uyuni, Andean mountains, and the world's highest cable car system in La Paz.",
-    icon: Mountain
+    description:
+      "Salt flats of Salar de Uyuni, Andean mountains, and the world's highest cable car system in La Paz.",
   },
   {
     title: "Lençóis Maranhenses",
-    description: "Brazil's stunning sand dunes and crystal-clear lagoons in Maranhão National Park.",
-    icon: Waves
-  }
+    description:
+      "Brazil's stunning sand dunes and crystal-clear lagoons in Maranhão National Park.",
+  },
 ];
 
 export function FutureAdventures() {
   return (
-    <div className="space-y-6">
-      <h2 className="text-2xl font-bold text-foreground">Future Adventures</h2>
-      <div className="grid gap-6 md:grid-cols-3">
-        {adventures.map((adventure, index) => {
-          const IconComponent = adventure.icon;
-          return (
-            <div key={index} className="p-6 space-y-4 rounded-2xl border bg-card border-border">
-              <div className="flex justify-center items-center w-12 h-12 rounded-full bg-primary/10">
-                <IconComponent className="w-6 h-6 text-primary" />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground">{adventure.title}</h3>
-              <p className="text-sm text-muted-foreground">
-                {adventure.description}
-              </p>
-            </div>
-          );
-        })}
+    <div>
+      <h2 className="font-serif text-[32px] font-extrabold tracking-tight mb-8 text-center">
+        Future Adventures
+      </h2>
+      <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
+        {adventures.map((adventure, index) => (
+          <div
+            key={index}
+            className="bg-[#F5EBD9] rounded-[16px] p-6 border-[1.5px] border-[rgba(59,35,20,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#D4581A]"
+          >
+            <h3 className="font-serif text-[17px] font-bold text-[#3B2314] mb-3">
+              {adventure.title}
+            </h3>
+            <p className="text-[13px] text-[#7A5C42] leading-[1.6]">
+              {adventure.description}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

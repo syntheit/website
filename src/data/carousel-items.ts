@@ -1,14 +1,12 @@
 import type { CarouselItem } from "@/components/ui/carousel";
-import { 
-  Languages, 
-  Camera, 
-  Plane, 
-  BookOpen, 
-  Code, 
+import {
+  Languages,
+  BookOpen,
+  Code,
   Palette,
-  MapPin,
   Globe,
-  FileText
+  FileText,
+  DollarSign
 } from "lucide-react";
 
 export const carouselItems: CarouselItem[] = [
@@ -21,37 +19,29 @@ export const carouselItems: CarouselItem[] = [
     icon: Languages,
   },
   {
-    id: "travel-checklist",
-    title: "Travel Checklist App",
-    description: "A simple, elegant travel checklist app I built to help travelers stay organized. Never forget essential items again.",
-    href: "https://travel-checklist.matv.io",
+    id: "retrospend",
+    title: "Retrospend",
+    description: "A personal finance and expense tracker application that helps manage expenses, track wealth, and handle multi-currency transactions with exchange rate integration.",
+    href: "https://retrospend.app",
     external: true,
-    category: "App",
-    icon: Plane,
-  },
-  {
-    id: "jujuy-photos",
-    title: "Photos from Jujuy",
-    description: "Capturing the stunning landscapes and vibrant culture of Argentina's northern province. From colorful mountains to ancient ruins.",
-    href: "/photography",
-    category: "Photography",
-    icon: Camera,
+    category: "Finance",
+    icon: DollarSign,
   },
   {
     id: "projects",
     title: "Projects & Work",
     description: "Explore my software engineering projects, from full-stack applications to innovative tools and solutions.",
-    href: "/projects",
+    href: "/about",
     category: "Development",
     icon: Code,
   },
   {
-    id: "travel-blog",
-    title: "Travel Adventures",
-    description: "Stories and experiences from my travels around the world. From backpacking through Europe to exploring South America.",
-    href: "/travel",
-    category: "Travel",
-    icon: MapPin,
+    id: "world",
+    title: "World Atlas",
+    description: "A personal atlas organized by country — places, notes, and local knowledge from around the world.",
+    href: "/world",
+    category: "World",
+    icon: Globe,
   },
   {
     id: "resources",

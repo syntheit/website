@@ -2,16 +2,21 @@
 
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
-import { ArrowLeft, Gamepad2, Target, Brain, Trophy, RotateCcw, Play, Palette } from "lucide-react";
+import { Gamepad2, Target, Brain, Trophy, RotateCcw, Play, Palette, ArrowLeft } from "lucide-react";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+
+const NUMBER_RANGE_MAX = 100;
+const MEMORY_PAIR_COUNT = 8;
+const MATH_INITIAL_TIME = 15;
+const MATH_MAX_TIME = 20;
+const MATH_LEVEL_UP_SCORE = 50;
 
 interface Game {
   id: string;
   name: string;
   description: string;
   icon: React.ComponentType<{ className?: string }>;
-  component: React.ComponentType;
+  component: React.ComponentType | null;
 }
 
 // Number Guessing Game Component
@@ -25,19 +30,19 @@ function NumberGuessingGame() {
   const [range, setRange] = useState({ min: 1, max: 100 });
 
   const startNewGame = () => {
-    const newTarget = Math.floor(Math.random() * 100) + 1;
+    const newTarget = Math.floor(Math.random() * NUMBER_RANGE_MAX) + 1;
     setTargetNumber(newTarget);
     setGuess("");
     setMessage("");
     setAttempts(0);
     setGameStarted(true);
-    setRange({ min: 1, max: 100 });
+    setRange({ min: 1, max: NUMBER_RANGE_MAX });
   };
 
   const handleGuess = () => {
     const guessNum = parseInt(guess);
-    if (isNaN(guessNum) || guessNum < 1 || guessNum > 100) {
-      setMessage("Please enter a valid number between 1 and 100!");
+    if (isNaN(guessNum) || guessNum < 1 || guessNum > NUMBER_RANGE_MAX) {
+      setMessage(`Please enter a valid number between 1 and ${NUMBER_RANGE_MAX}!`);
       return;
     }
 
@@ -73,7 +78,7 @@ function NumberGuessingGame() {
           <Target className="w-8 h-8 text-primary" />
         </div>
         <h3 className="text-3xl font-bold text-foreground">Number Guessing</h3>
-        <p className="text-muted-foreground">Find the secret number between 1 and 100!</p>
+        <p className="text-muted-foreground">Find the secret number between 1 and {NUMBER_RANGE_MAX}!</p>
         {bestScore && (
           <div className="inline-flex gap-2 items-center px-4 py-2 rounded-full bg-primary/10">
             <Trophy className="w-4 h-4 text-primary" />
@@ -98,7 +103,7 @@ function NumberGuessingGame() {
                 <div className="overflow-hidden flex-1 mx-4 h-1 rounded-full bg-border">
                   <div 
                     className="h-full bg-gradient-to-r from-blue-500 to-orange-500 rounded-full transition-all duration-300"
-                    style={{ width: `${((range.max - range.min) / 99) * 100}%` }}
+                    style={{ width: `${((range.max - range.min) / (NUMBER_RANGE_MAX - 1)) * 100}%` }}
                   />
                 </div>
                 <span className="text-orange-600">{range.max}</span>
@@ -115,8 +120,8 @@ function NumberGuessingGame() {
                   placeholder="Enter your guess..."
                   className="flex-1 px-6 py-4 text-lg rounded-xl border transition-all border-border bg-background text-foreground focus:ring-2 focus:ring-primary/20 focus:border-primary"
                   onKeyPress={(e) => e.key === 'Enter' && handleGuess()}
-                  min="1"
-                  max="100"
+                  min={1}
+                  max={NUMBER_RANGE_MAX}
                 />
                 <Button onClick={handleGuess} size="lg" className="px-8 py-4 text-lg">
                   Guess
@@ -149,7 +154,6 @@ function MemoryGame() {
   const [flippedCards, setFlippedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
-  const [, setCurrentEmojis] = useState<string[]>([]);
 
   // Large pool of emojis to choose from
   const emojiPool = [
@@ -157,11 +161,9 @@ function MemoryGame() {
   ];
 
   const initializeGame = () => {
-    // Randomly select 8 unique emojis from the pool
     const shuffledPool = [...emojiPool].sort(() => Math.random() - 0.5);
-    const selectedEmojis = shuffledPool.slice(0, 8);
-    setCurrentEmojis(selectedEmojis);
-    
+    const selectedEmojis = shuffledPool.slice(0, MEMORY_PAIR_COUNT);
+
     const gameCards = [...selectedEmojis, ...selectedEmojis]
       .sort(() => Math.random() - 0.5)
       .map((value, index) => ({
@@ -201,7 +203,7 @@ function MemoryGame() {
         const firstCard = cards.find(c => c.id === first);
         const secondCard = cards.find(c => c.id === second);
         
-        if (firstCard && secondCard && firstCard.value === secondCard.value) {
+        if (firstCard?.value === secondCard?.value && firstCard) {
           // Match found
           const firstCardToUpdate = newCards.find(c => c.id === first);
           const secondCardToUpdate = newCards.find(c => c.id === second);
@@ -341,7 +343,7 @@ function QuickMathGame() {
     setScore(0);
     setLevel(1);
     setStreak(0);
-    setTimeLeft(15);
+    setTimeLeft(MATH_INITIAL_TIME);
     setIsPlaying(true);
     setGameOver(false);
     setMessage("");
@@ -365,9 +367,9 @@ function QuickMathGame() {
       setMessage(`🎉 Correct! +${points} points (${timeBonus}s bonus + ${streakBonus} streak)`);
       
       // Level up every 5 correct answers
-      if ((score + points) % 50 === 0) {
+      if ((score + points) % MATH_LEVEL_UP_SCORE === 0) {
         setLevel(prev => prev + 1);
-        setTimeLeft(prev => Math.min(prev + 3, 20)); // Bonus time for level up
+        setTimeLeft(prev => Math.min(prev + 3, MATH_MAX_TIME));
       }
       
       setTimeout(() => {
@@ -382,7 +384,7 @@ function QuickMathGame() {
   };
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isPlaying && timeLeft > 0) {
       interval = setInterval(() => {
         setTimeLeft(prev => {
@@ -506,7 +508,7 @@ function QuickMathGame() {
               <div className="w-full h-2 rounded-full bg-muted">
                 <div 
                   className="h-2 bg-gradient-to-r from-green-500 to-orange-500 rounded-full transition-all duration-1000"
-                  style={{ width: `${(timeLeft / 15) * 100}%` }}
+                  style={{ width: `${(timeLeft / MATH_INITIAL_TIME) * 100}%` }}
                 />
               </div>
             </div>
@@ -534,7 +536,7 @@ const games: Game[] = [
   {
     id: "number-guessing",
     name: "Number Guessing",
-    description: "Guess the number between 1 and 100",
+    description: `Guess the number between 1 and ${NUMBER_RANGE_MAX}`,
     icon: Target,
     component: NumberGuessingGame
   },
@@ -557,7 +559,7 @@ const games: Game[] = [
     name: "ColorGuessr",
     description: "Can you guess the hex/rgb of a color just by looking at it?",
     icon: Palette,
-    component: () => null
+    component: null
   }
 ];
 
@@ -572,15 +574,6 @@ export default function MinigamesPage() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Back Button */}
-      <div className="px-4 pb-6 sm:px-8 md:px-12">
-        <Link href="/">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
 
       {/* Main Content */}
       <div className="flex-1 px-4 pb-12 sm:px-8 md:px-12">

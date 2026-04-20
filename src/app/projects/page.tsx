@@ -1,13 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/ui/navbar";
 import { ProjectCard } from "@/components/ui/project-card";
 import { StatsCard } from "@/components/ui/stats-card";
 import { ProjectHero } from "@/components/ui/project-hero";
 import { ProjectCTA } from "@/components/ui/project-cta";
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { projects } from "../metadata/projects";
 import { calculateProjectStats } from "@/lib/project-utils";
 
@@ -22,15 +19,6 @@ export default function ProjectsPage() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Back Button */}
-      <div className="px-4 sm:px-8 md:px-12 pb-6">
-        <Link href="/">
-          <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Home
-          </Button>
-        </Link>
-      </div>
 
       {/* Main Content */}
       <div className="flex-1 px-4 sm:px-8 md:px-12 pb-12">
