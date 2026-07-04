@@ -74,3 +74,23 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* MapLibre popup styling for the world place-hover card. */
+.place-hover-popup .maplibregl-popup-content {
+  background: #F5EBD9;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(59, 35, 20, 0.15);
+  border: 1.5px solid rgba(59, 35, 20, 0.1);
+  overflow: hidden;
+}
+.place-hover-popup .maplibregl-popup-tip {
+  border-top-color: #F5EBD9;
+  border-bottom-color: #F5EBD9;
+}
+.place-hover-popup .maplibregl-popup-close-button {
+  display: none;
+}
+.place-hover-popup {
+  z-index: 5;
+}

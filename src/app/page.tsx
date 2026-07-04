@@ -18,13 +18,13 @@ const projectCards = [
     tag: "Finance",
     title: "Retrospend",
     description: "Personal finance app for tracking expenses, wealth, and multi-currency transactions with exchange rate integration.",
-    href: "https://retrospend.com",
+    href: "https://retrospend.app",
   },
   {
     tag: "Development",
     title: "Projects & Apps",
     description: "9 software projects from full-stack web apps to infrastructure tools, built with modern technologies.",
-    href: "/about",
+    href: "/projects",
   },
   {
     tag: "Curated",
@@ -34,9 +34,9 @@ const projectCards = [
   },
   {
     tag: "Travel",
-    title: "Travel Adventures",
-    description: "28 countries across 4 continents. Roadtrips through southern Brazil, hidden gems in Paraguay, and more.",
-    href: "/travel",
+    title: "World Atlas",
+    description: "A personal atlas of 1,900+ places across 28 countries — restaurants, cafes, museums, hikes, and more.",
+    href: "/world",
   },
   {
     tag: "Learning",
@@ -78,8 +78,12 @@ export default function HomePage() {
           <h1 className="font-serif text-[48px] md:text-[64px] font-[900] leading-[1.05] mb-6 tracking-tight text-[#3B2314]">
             Daniel Miller
           </h1>
+          {/* TODO: Consider tweaking the tagline. "building businesses" is aspirational — */}
+          {/* asado events are early stage, community buying platform is in validation. */}
+          {/* Options: "building things", "building projects and businesses", or keep it if you feel it's accurate enough. */}
+          {/* The rest of the tagline is solid. */}
           <p className="text-[17px] leading-[1.75] text-[#7A5C42] max-w-[460px] mb-9">
-            Programmer, entrepreneur, and perpetual learner building businesses
+            Programmer, entrepreneur, and perpetual learner building things
             in Buenos Aires while chasing marathons, languages, and whatever
             comes next.
           </p>
@@ -136,15 +140,20 @@ export default function HomePage() {
             <h2 className="font-serif text-[36px] font-extrabold mb-5 tracking-tight">
               About Me
             </h2>
+            {/* TODO: Rewrite both paragraphs. The current text is generic and could be anyone. */}
+            {/* Paragraph 1: Who you are — specific, not vibes. */}
+            {/*   22, from Chicago, half-Ukrainian, living in Buenos Aires. Dropped out of RPI to move here. */}
+            {/*   Why BA — you chose it deliberately: chaos over comfort, interesting process over perfect destination. */}
+            {/* Paragraph 2: What your days look like — make it vivid. */}
+            {/*   Code for New Reach during the day, run 30-50km/week, climb weekly, cook everything from scratch. */}
+            {/*   Mundo Lingo, Russian cultural center on Saturdays, asado networking events with Mitko. */}
+            {/*   Reading Argentine literature in Spanish, watching French films, building Retrospend at night. */}
+            {/* Tone: like the homepage hero tagline but with more texture. Not a pitch, just your life. */}
             <p className="text-base leading-[1.75] text-[#7A5C42] mb-4 max-w-[500px]">
-              I&apos;m an open-minded individual always looking for something new
-              to explore, whether that&apos;s a country, a language, or an idea
-              worth building.
+              [Rewrite: who you are and why Buenos Aires — see TODO above]
             </p>
             <p className="text-base leading-[1.75] text-[#7A5C42] mb-4 max-w-[500px]">
-              I work as a programmer and am in the early stages of building
-              businesses here in Argentina. My days are a mix of coding,
-              learning, meeting interesting people, and making things happen.
+              [Rewrite: what your days actually look like — see TODO above]
             </p>
             <div className="grid grid-cols-2 gap-5 mt-8">
               {infoItems.map((item) => (

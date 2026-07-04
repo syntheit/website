@@ -1,11 +1,10 @@
 import Image from "next/image";
 
 interface HeroSectionProps {
-  name: string;
   meta: Array<{ label: string; value: string }>;
 }
 
-export function HeroSection({ name, meta }: HeroSectionProps) {
+export function HeroSection({ meta }: HeroSectionProps) {
   return (
     <div className="space-y-8 text-center">
       <div
@@ -27,8 +26,16 @@ export function HeroSection({ name, meta }: HeroSectionProps) {
         </h1>
         <div className="mx-auto max-w-xl rounded-xl border-2 border-dashed border-primary/20 px-6 py-4">
           <p className="text-[15px] italic leading-relaxed text-muted-foreground">
-            Daniel will write this. A short personal intro in his own voice, not
-            AI-generated.
+            {/* TODO: Daniel writes this. 2-3 sentences, first person. */}
+            {/* Tone: how you'd introduce yourself at Mundo Lingo to someone interesting — direct, no fluff. */}
+            {/* Hit these beats: */}
+            {/*   - 22, American from Chicago suburbs, half-Ukrainian, living in Buenos Aires ~1.5 years */}
+            {/*   - Programmer by trade (full-stack, NixOS, self-hosted everything) */}
+            {/*   - The "full-stack human" angle — you don't just code, you run marathons, speak 6 languages, build businesses, cook from scratch, self-host your infra */}
+            {/*   - Why Buenos Aires — chose chaos over comfort, Argentina over Switzerland, interesting process over perfect destination */}
+            {/*   - End with something forward-looking: the passport, the languages, the long game */}
+            {/* Keep it under 4 sentences. No LinkedIn energy. */}
+            [Write your intro here]
           </p>
         </div>
       </div>

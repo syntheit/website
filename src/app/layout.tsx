@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Daniel Miller" }],
   creator: "Daniel Miller",
   publisher: "Daniel Miller",
-  metadataBase: new URL("https://www.matv.io"),
+  metadataBase: new URL("https://matv.io"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.matv.io",
+    url: "https://matv.io",
     title: "Daniel Miller",
     description,
     siteName: "Daniel Miller",
@@ -61,9 +61,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: "#E8D5B7",
 };
-
-export const themeColor = "#E8D5B7";
 
 export default function RootLayout({
   children,

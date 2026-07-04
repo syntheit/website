@@ -57,7 +57,7 @@ const languages = [
     filled: 6,
     isNative: false,
     blurb:
-      "Growing passively through Spanish since they share so much. Trips to southern Brazil. As one grows, the other follows.",
+      "Brazilian friend João is the main driver — we speak Portuguese together, he helps with BRL logistics, and trips to southern Brazil fill in the gaps. Spanish and Portuguese reinforce each other constantly.",
     goal: null,
   },
 ];
@@ -270,11 +270,22 @@ export default function LanguagesPage() {
           My Approach
         </h2>
         <div className="bg-[#F5EBD9] rounded-xl p-8 border-2 border-dashed border-[rgba(59,35,20,0.15)] text-[#7A5C42] text-[14px] italic leading-[1.7] max-w-[680px]">
-          Daniel will write this section. His approach centers on learning
-          through living, comprehensible input, music and media in target
-          languages, AI-generated practice material with curated grammar
-          focuses, and speaking early. This is a placeholder for 2-3 paragraphs
-          in his own words.
+          {/* TODO: Daniel writes this. 2-3 paragraphs in first person. */}
+          {/* Paragraph 1 — The philosophy: */}
+          {/*   "I don't study languages — I live them." Every language tied to real people, places, experiences. */}
+          {/*   No flashcards, no grammar tables. You learn Spanish because you live in BA, Russian because of your heritage */}
+          {/*   and the cultural center on Saturdays, French because it speaks to your soul. */}
+          {/* Paragraph 2 — The method: */}
+          {/*   Steve Kaufmann-aligned: comprehensible input at 85-90%, speak early, tolerate mistakes. */}
+          {/*   De-anglicize entertainment — if content doesn't need English, it shouldn't be in English. */}
+          {/*   French films, Argentine literature, Russian mafia game nights, Portuguese with João. */}
+          {/*   LLMs as infinitely patient conversation partners and tutors. */}
+          {/* Paragraph 3 — The psycholinguistic reality (optional, makes it interesting): */}
+          {/*   Cross-linguistic activation — wrong-language words surface daily, dreams in mixed languages, */}
+          {/*   mental math now in Spanish. Romance cluster functions as unified system. */}
+          {/*   ~20 min warmup to fluency when switching. The goal is thinking in each language, not translating. */}
+          {/* Tone: confident but not preachy. You're describing what works for you, not prescribing. */}
+          [Write your approach here]
         </div>
       </section>
 

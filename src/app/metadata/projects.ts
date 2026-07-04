@@ -58,13 +58,51 @@ export const projects: Project[] = [
   {
     id: 4,
     title: "Self-Managed Server Environment",
-    description: "Actively administer a range of self-hosted services through industry-standard platforms.",
+    // TODO: Same rewrite as in about.ts — 6 machines, WireGuard mesh, ZFS, 20+ services, declarative NixOS.
+    // Make it match whatever you write in about.ts, or make this one slightly more technical since it's the projects page.
+    description:
+      "[Rewrite: 6-machine fleet, WireGuard/Headscale mesh, ZFS storage, 20+ self-hosted services, Prometheus/Grafana monitoring, restic backups — all declarative NixOS]",
     category: "infrastructure",
-    technologies: ["NixOS", "Docker", "Cloudflare", "Go", "bash"],
+    technologies: ["NixOS", "Docker", "Cloudflare", "ZFS", "WireGuard", "Go"],
     github: null,
     live: null,
     featured: false,
     year: "2019",
+  },
+  {
+    id: 10,
+    title: "Pixel Phone NixOS Server",
+    // TODO: Write a description. This is one of the most interesting projects you have.
+    // A cracked-screen Pixel 6 Pro converted into a headless NixOS ARM server.
+    // Architecture: LineageOS → pKVM → NixOS VM → Docker containers.
+    // Runs your website via Cloudflare tunnel, SSH access, ~3-5% overhead.
+    // pKVM + NixOS solved GKI ABI compatibility issues that stopped most people.
+    // Tone: matter-of-fact but let the novelty speak for itself.
+    description:
+      "[Write: cracked Pixel 6 Pro → pKVM → NixOS VM → Docker. Runs your website. See TODO above]",
+    category: "infrastructure",
+    technologies: ["NixOS", "Docker", "Cloudflare", "Linux", "pKVM"],
+    github: null,
+    live: "https://matv.io",
+    featured: false,
+    year: "2026",
+  },
+  {
+    id: 11,
+    title: "Malli AI",
+    // TODO: Write a description. Multi-agent AI assistant platform for the Owners Club / New Reach community.
+    // Handles inbound messages via iMessage, Twilio SMS, and WhatsApp.
+    // Agent orchestration, identity management, campaign execution, knowledge graphs.
+    // This is work you built — decide if you want to list it publicly or keep it private (it's a work project).
+    // If you include it, focus on what you architected: the multi-agent system, the message routing, the knowledge graph.
+    description:
+      "[Write: multi-agent AI platform, iMessage/SMS/WhatsApp routing, knowledge graphs, agent orchestration — or remove if too work-specific]",
+    category: "ai",
+    technologies: ["Python", "FastAPI", "Docker", "SQLite", "Twilio"],
+    github: null,
+    live: null,
+    featured: false,
+    year: "2026",
   },
   {
     id: 5,
@@ -91,9 +129,9 @@ export const projects: Project[] = [
   {
     id: 7,
     title: "Retrospend",
-    description: "A personal finance and expense tracker application that helps manage expenses, track wealth, and handle multi-currency transactions with exchange rate integration.",
+    description: "Self-hostable, open-source personal finance app with bill splitting. 100+ currencies including parallel market rates (Argentina's blue dollar), person-centric debt tracking, AI-powered bank statement importing, and budgeting — all in one place.",
     category: "web",
-    technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "tRPC"],
+    technologies: ["Next.js", "React", "Tailwind CSS", "PostgreSQL", "tRPC", "Go", "Prisma", "Docker"],
     github: "https://github.com/syntheit/retrospend",
     live: "https://retrospend.app",
     featured: true,

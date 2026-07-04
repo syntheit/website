@@ -4,4 +4,6 @@ export { RetrospendShowcase } from "./RetrospendShowcase";
 export { OtherProjects } from "./OtherProjects";
 export { ExperienceSection } from "./ExperienceSection";
 export { WhatImInto } from "./WhatImInto";
+export { NixInfraSection } from "./NixInfraSection";
+export { MusicSection } from "./MusicSection";
 export { QuotesSection } from "./QuotesSection";
