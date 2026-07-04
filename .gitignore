@@ -48,3 +48,7 @@ yarn-error.log*
 
 # photography files
 /public/images
+# World places data pipeline
+scripts/.cache/
+public/data/world/_raw-*.json
+scripts/.probe-urls.txt
