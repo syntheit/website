@@ -23,13 +23,13 @@ const projectCards = [
   {
     tag: "Development",
     title: "Projects & Apps",
-    description: "9 software projects from full-stack web apps to infrastructure tools, built with modern technologies.",
+    description: "12 software projects from full-stack web apps to infrastructure tools, built with modern technologies.",
     href: "/projects",
   },
   {
     tag: "Curated",
     title: "Cool Resources",
-    description: "777 curated websites, tools, articles, and resources I find interesting and useful. From coding to history.",
+    description: "700+ curated websites, tools, articles, and resources I find interesting and useful. From coding to history.",
     href: "/resources",
   },
   {
@@ -59,10 +59,11 @@ const infoItems = [
   { label: "Focus", value: "Full-stack dev" },
 ];
 
+// Rounded on purpose — the exact counts drift with every data refresh.
 const stats = [
   { number: "28", label: "Countries visited" },
-  { number: "777", label: "Resources curated" },
-  { number: "9", label: "Projects built" },
+  { number: "700+", label: "Resources curated" },
+  { number: "12", label: "Projects built" },
 ];
 
 export default function HomePage() {
