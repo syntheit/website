@@ -590,8 +590,11 @@ async function main() {
 
   console.log(`\nLists kept: ${enrichedLists.length} / ${lists.length}`);
 
-  // 6. Write outputs
-  await writeFile("public/data/world/places.json", JSON.stringify(published, null, 2));
+  // 6. Write outputs. internalNote is admin-only — it must never reach the
+  // published JSON, which is committed to a public repo and shipped to the
+  // client bundle. It stays in overrides.json, which the admin reads directly.
+  const sanitized = published.map(({ internalNote: _drop, ...p }) => p);
+  await writeFile("public/data/world/places.json", JSON.stringify(sanitized, null, 2));
   await writeFile("public/data/world/lists.json", JSON.stringify(enrichedLists, null, 2));
   await writeFile(
     "public/data/world/index.json",

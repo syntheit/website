@@ -62,6 +62,20 @@ async function writeJsonAtomic(filename: string, data: unknown): Promise<void> {
   await rename(tmp, path);
 }
 
+// tmp+rename is atomic against torn files, not against interleaved
+// read-modify-write cycles: two overlapping PATCHes would each write back a
+// map missing the other's change. Serialize every mutation behind a single
+// in-process chain — sufficient for the single-admin, single-process deploy.
+let mutationChain: Promise<unknown> = Promise.resolve();
+function serialized<T>(fn: () => Promise<T>): Promise<T> {
+  const run = mutationChain.then(fn, fn);
+  mutationChain = run.then(
+    () => undefined,
+    () => undefined,
+  );
+  return run;
+}
+
 async function writeOverridesAtomic(next: OverridesMap): Promise<void> {
   await writeJsonAtomic("overrides.json", next);
 }
@@ -128,25 +142,27 @@ export async function patchOverride(
   placeId: string,
   patch: Partial<PlaceOverride>,
 ): Promise<PlaceOverride | null> {
-  const all = await readOverrides();
-  const existing = all[placeId];
-  const merged: PlaceOverride = { ...(existing ?? {}), ...patch };
-  for (const [key, falsyValue] of Object.entries(FALSY_BOOL_STRIP)) {
-    if (patch[key as keyof PlaceOverride] === falsyValue) {
-      delete (merged as Record<string, unknown>)[key];
+  return serialized(async () => {
+    const all = await readOverrides();
+    const existing = all[placeId];
+    const merged: PlaceOverride = { ...(existing ?? {}), ...patch };
+    for (const [key, falsyValue] of Object.entries(FALSY_BOOL_STRIP)) {
+      if (patch[key as keyof PlaceOverride] === falsyValue) {
+        delete (merged as Record<string, unknown>)[key];
+      }
     }
-  }
-  const pruned = pruneOverride(merged);
-  if (essentiallyEqual(pruned, existing)) {
-    return existing ?? null;
-  }
-  if (pruned === null) {
-    delete all[placeId];
-  } else {
-    all[placeId] = pruned;
-  }
-  await writeOverridesAtomic(all);
-  return pruned;
+    const pruned = pruneOverride(merged);
+    if (essentiallyEqual(pruned, existing)) {
+      return existing ?? null;
+    }
+    if (pruned === null) {
+      delete all[placeId];
+    } else {
+      all[placeId] = pruned;
+    }
+    await writeOverridesAtomic(all);
+    return pruned;
+  });
 }
 
 // ── List metadata overrides (for auto lists from Takeout) ──────────────
@@ -177,14 +193,16 @@ export async function patchListOverride(
   listId: string,
   patch: Partial<ListOverride>,
 ): Promise<ListOverride | null> {
-  const all = await readListOverrides();
-  const merged: ListOverride = { ...all[listId], ...patch };
-  if (patch.hidden === false) delete merged.hidden;
-  const pruned = pruneListOverride(merged);
-  if (pruned === null) delete all[listId];
-  else all[listId] = pruned;
-  await writeJsonAtomic("list-overrides.json", all);
-  return pruned;
+  return serialized(async () => {
+    const all = await readListOverrides();
+    const merged: ListOverride = { ...all[listId], ...patch };
+    if (patch.hidden === false) delete merged.hidden;
+    const pruned = pruneListOverride(merged);
+    if (pruned === null) delete all[listId];
+    else all[listId] = pruned;
+    await writeJsonAtomic("list-overrides.json", all);
+    return pruned;
+  });
 }
 
 // ── Custom lists (admin-created, not from Takeout) ─────────────────────
@@ -200,16 +218,20 @@ async function writeCustomLists(next: CustomListsMap): Promise<void> {
 }
 
 export async function upsertCustomList(list: CustomList): Promise<CustomList> {
-  const all = await readCustomLists();
-  all[list.id] = list;
-  await writeCustomLists(all);
-  return list;
+  return serialized(async () => {
+    const all = await readCustomLists();
+    all[list.id] = list;
+    await writeCustomLists(all);
+    return list;
+  });
 }
 
 export async function deleteCustomList(id: string): Promise<boolean> {
-  const all = await readCustomLists();
-  if (!(id in all)) return false;
-  delete all[id];
-  await writeCustomLists(all);
-  return true;
+  return serialized(async () => {
+    const all = await readCustomLists();
+    if (!(id in all)) return false;
+    delete all[id];
+    await writeCustomLists(all);
+    return true;
+  });
 }

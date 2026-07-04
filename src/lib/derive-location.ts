@@ -18,6 +18,12 @@ import { ALL_RESOURCES } from "@/lib/resources";
 
 const LOCATION_BY_SLUG = new Map(locations.map((l) => [l.slug, l]));
 
+// Places whose country resolution failed land in the "unknown" bucket. It's
+// meaningful in the admin, but it isn't a destination — keep it out of the
+// sidebar, static params, and location pages. (FilterChips and the admin
+// browser exclude it separately.)
+const HIDDEN_COUNTRY_SLUGS = new Set(["unknown"]);
+
 // All country slugs that have either places or resources tagged. Used by
 // generateStaticParams so every reachable country has a static page.
 export function allKnownCountrySlugs(): string[] {
@@ -25,7 +31,7 @@ export function allKnownCountrySlugs(): string[] {
   for (const slug of Object.keys(WORLD_INDEX.byCountry)) set.add(slug);
   for (const r of ALL_RESOURCES) for (const c of r.countries) set.add(c);
   for (const l of locations) if (l.type === "country") set.add(l.slug);
-  return [...set];
+  return [...set].filter((s) => !HIDDEN_COUNTRY_SLUGS.has(s));
 }
 
 export interface SidebarCountry {
@@ -56,6 +62,7 @@ export function autoGenCountriesForSidebar(): SidebarCountry[] {
   const out: SidebarCountry[] = [];
   for (const slug of slugs) {
     if (curated.has(slug)) continue;
+    if (HIDDEN_COUNTRY_SLUGS.has(slug)) continue;
     const placeCount = places[slug] ?? 0;
     const resourceCount = resCounts[slug] ?? 0;
     if (placeCount === 0 && resourceCount < 2) continue;
@@ -106,6 +113,7 @@ function viewportFromCountryPlaces(country: string): MapViewport | null {
 export function deriveLocation(slug: string): Location | null {
   const handCurated = LOCATION_BY_SLUG.get(slug);
   if (handCurated) return handCurated;
+  if (HIDDEN_COUNTRY_SLUGS.has(slug)) return null;
 
   const placeCount = WORLD_INDEX.byCountry[slug] ?? 0;
   const hasResources = ALL_RESOURCES.some((r) => r.countries.includes(slug));
