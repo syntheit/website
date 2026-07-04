@@ -1,5 +1,7 @@
-import { locations } from "@/data/world-data";
 import { LocationDetail } from "@/components/world/LocationDetail";
+import { resourcesForLocation } from "@/lib/resources";
+import { allKnownCountrySlugs, deriveLocation } from "@/lib/derive-location";
+import { locations } from "@/data/world-data";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -8,12 +10,16 @@ interface PageProps {
 }
 
 export function generateStaticParams() {
-  return locations.map((l) => ({ slug: l.slug }));
+  // Hand-curated locations + every country with tagged places or resources.
+  const seen = new Set<string>();
+  for (const l of locations) seen.add(l.slug);
+  for (const s of allKnownCountrySlugs()) seen.add(s);
+  return [...seen].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const location = locations.find((l) => l.slug === slug);
+  const location = deriveLocation(slug);
   if (!location) return {};
   return {
     title: `${location.name} — World — Daniel Miller`,
@@ -23,7 +29,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function WorldSlugPage({ params }: PageProps) {
   const { slug } = await params;
-  const location = locations.find((l) => l.slug === slug);
+  const location = deriveLocation(slug);
   if (!location) notFound();
-  return <LocationDetail location={location} />;
+  const resources = resourcesForLocation(location);
+  return <LocationDetail location={location} resources={resources} />;
 }

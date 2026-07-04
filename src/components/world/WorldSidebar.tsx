@@ -1,16 +1,51 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, X, Menu } from "lucide-react";
-import { locations, REGION_ORDER } from "@/data/world-data";
+import { Search, X, Menu, Globe } from "lucide-react";
+import { locations, REGION_ORDER, type Location } from "@/data/world-data";
+import {
+  WORLD_INDEX,
+  bboxFromViewport,
+  countPlacesInBbox,
+} from "@/lib/world-places";
+import {
+  autoGenCountriesForSidebar,
+  type SidebarCountry,
+} from "@/lib/derive-location";
+
+const AUTO_GEN_COUNTRIES: SidebarCountry[] = autoGenCountriesForSidebar();
 
 const DEFAULT_COLLAPSED = new Set(["Europe", "Asia", "Oceania", "Caribbean"]);
 
+/**
+ * Compute the live place count for a single Location:
+ *  - Countries → use WORLD_INDEX.byCountry (1:1 by slug)
+ *  - Cities / regions → bbox-filter from the location's viewport
+ * Done once at module load so the sidebar render is cheap.
+ */
+function computeLiveCount(loc: Location): number {
+  if (loc.type === "country") {
+    return WORLD_INDEX.byCountry[loc.slug] ?? 0;
+  }
+  return countPlacesInBbox(bboxFromViewport(loc.viewport));
+}
+
+const LIVE_COUNTS: Record<string, number> = (() => {
+  const out: Record<string, number> = {};
+  for (const loc of locations) out[loc.slug] = computeLiveCount(loc);
+  return out;
+})();
+
 export function WorldSidebar() {
   const pathname = usePathname();
-  const activeSlug = pathname.replace("/world/", "") || "argentina";
+  // /world (no slug) → activeSlug is empty (the "Worldwide" item is active).
+  // /world/argentina → "argentina".
+  const activeSlug = pathname.startsWith("/world/")
+    ? pathname.replace("/world/", "")
+    : "";
+  const isWorldwide = pathname === "/world";
 
   const [search, setSearch] = useState("");
   const [collapsedRegions, setCollapsedRegions] = useState<Set<string>>(
@@ -35,7 +70,7 @@ export function WorldSidebar() {
       name: region,
       countries: countries
         .filter((c) => c.region === region)
-        .sort((a, b) => (b.placeCount ?? 0) - (a.placeCount ?? 0)),
+        .sort((a, b) => (LIVE_COUNTS[b.slug] ?? 0) - (LIVE_COUNTS[a.slug] ?? 0)),
     })).filter((g) => g.countries.length > 0);
   }, [countries]);
 
@@ -60,8 +95,15 @@ export function WorldSidebar() {
       .filter((g) => g.countries.length > 0);
   }, [search, regionGroups]);
 
-  const totalCountries = countries.length;
-  const totalPlaces = locations.reduce((sum, l) => sum + (l.placeCount ?? 0), 0);
+  const filteredAutoGen = useMemo(() => {
+    if (!search.trim()) return AUTO_GEN_COUNTRIES;
+    const q = search.toLowerCase();
+    return AUTO_GEN_COUNTRIES.filter(
+      (c) => c.name.toLowerCase().includes(q) || c.slug.includes(q),
+    );
+  }, [search]);
+
+  const [otherCollapsed, setOtherCollapsed] = useState(true);
 
   const toggleRegion = (region: string) => {
     setCollapsedRegions((prev) => {
@@ -74,6 +116,23 @@ export function WorldSidebar() {
 
   const sidebarContent = (
     <>
+      {/* Worldwide link — always-available "back to global view" */}
+      <Link
+        href="/world"
+        onClick={() => setMobileOpen(false)}
+        className={`flex items-center gap-2 px-5 py-3 text-[14px] border-b border-[rgba(59,35,20,0.1)] transition-all duration-[120ms] ${
+          isWorldwide
+            ? "bg-[#F5EBD9] text-[#D4581A] font-semibold border-r-[3px] border-r-[#D4581A]"
+            : "text-[#3B2314] hover:bg-[rgba(59,35,20,0.04)] hover:text-[#D4581A]"
+        }`}
+      >
+        <Globe className="h-4 w-4" />
+        <span className="flex-1">Worldwide</span>
+        <span className="font-mono text-[11px] text-[#7A5C42]">
+          {WORLD_INDEX.totalPlaces}
+        </span>
+      </Link>
+
       {/* Search */}
       <div className="p-5 pb-3">
         <div className="relative">
@@ -98,7 +157,8 @@ export function WorldSidebar() {
 
       {/* Summary count */}
       <div className="px-5 pb-3 font-mono text-[11px] text-[#7A5C42]">
-        {totalCountries} countries · {totalPlaces} places
+        {countries.length + AUTO_GEN_COUNTRIES.length} countries ·{" "}
+        {WORLD_INDEX.totalPlaces} places
       </div>
 
       {/* Region groups */}
@@ -136,7 +196,7 @@ export function WorldSidebar() {
                       >
                         {country.name}
                         <span className="font-mono text-[11px] text-[#7A5C42]">
-                          {country.placeCount ?? 0}
+                          {LIVE_COUNTS[country.slug] ?? 0}
                         </span>
                       </Link>
                       {subs.map((sub) => (
@@ -152,7 +212,7 @@ export function WorldSidebar() {
                         >
                           {sub.name}
                           <span className="font-mono text-[10px] text-[#7A5C42]">
-                            {sub.placeCount ?? 0}
+                            {LIVE_COUNTS[sub.slug] ?? 0}
                           </span>
                         </Link>
                       ))}
@@ -162,6 +222,47 @@ export function WorldSidebar() {
             </div>
           );
         })}
+
+        {/* ── Other countries: auto-discovered from tagged places/resources ── */}
+        {filteredAutoGen.length > 0 && (
+          <div className="mb-[2px]">
+            <button
+              onClick={() => setOtherCollapsed((v) => !v)}
+              className="flex items-center w-full px-5 py-[9px] text-[11px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold hover:bg-[rgba(59,35,20,0.04)] transition-[background] duration-150 cursor-pointer select-none"
+            >
+              Other countries
+              <span className="font-mono text-[11px] text-[#7A5C42] ml-auto mr-2">
+                {filteredAutoGen.length}
+              </span>
+              <span className="text-[10px] text-[#7A5C42]">
+                {otherCollapsed && !search ? "▸" : "▾"}
+              </span>
+            </button>
+            {(!otherCollapsed || search) &&
+              filteredAutoGen.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/world/${c.slug}`}
+                  onClick={() => setMobileOpen(false)}
+                  className={`flex justify-between items-center py-[7px] px-5 pl-8 text-[14px] no-underline transition-all duration-[120ms] ${
+                    activeSlug === c.slug
+                      ? "bg-[#F5EBD9] text-[#D4581A] font-semibold border-r-[3px] border-r-[#D4581A]"
+                      : "text-[#7A5C42] hover:bg-[rgba(59,35,20,0.04)] hover:text-[#D4581A]"
+                  }`}
+                >
+                  <span className="truncate">{c.name}</span>
+                  <span className="font-mono text-[11px] text-[#7A5C42] flex gap-[6px] shrink-0">
+                    {c.placeCount > 0 && <span>{c.placeCount}</span>}
+                    {c.resourceCount > 0 && (
+                      <span className="opacity-60">
+                        {c.placeCount > 0 ? `· ${c.resourceCount}r` : `${c.resourceCount}r`}
+                      </span>
+                    )}
+                  </span>
+                </Link>
+              ))}
+          </div>
+        )}
       </div>
     </>
   );
