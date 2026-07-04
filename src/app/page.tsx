@@ -149,12 +149,17 @@ export default function HomePage() {
             {/*   Mundo Lingo, Russian cultural center on Saturdays, asado networking events with Mitko. */}
             {/*   Reading Argentine literature in Spanish, watching French films, building Retrospend at night. */}
             {/* Tone: like the homepage hero tagline but with more texture. Not a pitch, just your life. */}
-            <p className="text-base leading-[1.75] text-[#7A5C42] mb-4 max-w-[500px]">
-              [Rewrite: who you are and why Buenos Aires — see TODO above]
-            </p>
-            <p className="text-base leading-[1.75] text-[#7A5C42] mb-4 max-w-[500px]">
-              [Rewrite: what your days actually look like — see TODO above]
-            </p>
+            {/* Dev-only reminder — never ships. Replace with the real paragraphs. */}
+            {process.env.NODE_ENV !== "production" && (
+              <>
+                <p className="text-base leading-[1.75] text-[#7A5C42] mb-4 max-w-[500px]">
+                  [Rewrite: who you are and why Buenos Aires — see TODO above]
+                </p>
+                <p className="text-base leading-[1.75] text-[#7A5C42] mb-4 max-w-[500px]">
+                  [Rewrite: what your days actually look like — see TODO above]
+                </p>
+              </>
+            )}
             <div className="grid grid-cols-2 gap-5 mt-8">
               {infoItems.map((item) => (
                 <div key={item.label}>

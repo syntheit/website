@@ -24,6 +24,8 @@ export function HeroSection({ meta }: HeroSectionProps) {
         <h1 className="font-serif text-[42px] font-black leading-tight tracking-tight md:text-[52px]">
           About <span className="italic text-primary">Daniel</span>
         </h1>
+        {/* Dev-only reminder — never ships. Replace with the real intro. */}
+        {process.env.NODE_ENV !== "production" && (
         <div className="mx-auto max-w-xl rounded-xl border-2 border-dashed border-primary/20 px-6 py-4">
           <p className="text-[15px] italic leading-relaxed text-muted-foreground">
             {/* TODO: Daniel writes this. 2-3 sentences, first person. */}
@@ -38,6 +40,7 @@ export function HeroSection({ meta }: HeroSectionProps) {
             [Write your intro here]
           </p>
         </div>
+        )}
       </div>
 
       <div className="mx-auto grid max-w-md grid-cols-2 gap-5">

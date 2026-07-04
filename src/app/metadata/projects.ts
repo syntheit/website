@@ -61,7 +61,7 @@ export const projects: Project[] = [
     // TODO: Same rewrite as in about.ts — 6 machines, WireGuard mesh, ZFS, 20+ services, declarative NixOS.
     // Make it match whatever you write in about.ts, or make this one slightly more technical since it's the projects page.
     description:
-      "[Rewrite: 6-machine fleet, WireGuard/Headscale mesh, ZFS storage, 20+ self-hosted services, Prometheus/Grafana monitoring, restic backups — all declarative NixOS]",
+      "",
     category: "infrastructure",
     technologies: ["NixOS", "Docker", "Cloudflare", "ZFS", "WireGuard", "Go"],
     github: null,
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     // pKVM + NixOS solved GKI ABI compatibility issues that stopped most people.
     // Tone: matter-of-fact but let the novelty speak for itself.
     description:
-      "[Write: cracked Pixel 6 Pro → pKVM → NixOS VM → Docker. Runs your website. See TODO above]",
+      "",
     category: "infrastructure",
     technologies: ["NixOS", "Docker", "Cloudflare", "Linux", "pKVM"],
     github: null,
@@ -96,7 +96,7 @@ export const projects: Project[] = [
     // This is work you built — decide if you want to list it publicly or keep it private (it's a work project).
     // If you include it, focus on what you architected: the multi-agent system, the message routing, the knowledge graph.
     description:
-      "[Write: multi-agent AI platform, iMessage/SMS/WhatsApp routing, knowledge graphs, agent orchestration — or remove if too work-specific]",
+      "",
     category: "ai",
     technologies: ["Python", "FastAPI", "Docker", "SQLite", "Twilio"],
     github: null,

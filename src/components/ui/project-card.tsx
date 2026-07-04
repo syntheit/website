@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { ExternalLink, Calendar } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 import type { Project } from "@/app/metadata/projects";
+import { draftCopy } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: Project;
@@ -29,9 +30,11 @@ export function ProjectCard({ project, variant = "regular" }: ProjectCardProps) 
           <h3 className={`${isFeatured ? 'text-xl' : ''} font-semibold text-foreground mb-2`}>
             {project.title}
           </h3>
-          <p className={`${isFeatured ? '' : 'text-sm'} text-muted-foreground`}>
-            {project.description}
-          </p>
+          {draftCopy(project.description) && (
+            <p className={`${isFeatured ? '' : 'text-sm'} text-muted-foreground`}>
+              {project.description}
+            </p>
+          )}
         </div>
       </div>
       

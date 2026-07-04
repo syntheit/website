@@ -101,7 +101,7 @@ export const ABOUT_DATA = {
       // All declaratively managed with NixOS flakes. Running since 2019, evolved from basic Docker to full fleet.
       // 1-2 sentences that make someone go "wait, you run all that yourself?"
       description:
-        "[Rewrite: 6 machines, WireGuard mesh, ZFS, 20+ services, all declarative NixOS — see TODO above]",
+        "",
       tech: ["NixOS", "Docker", "Cloudflare", "ZFS", "WireGuard", "Go"],
       year: "2019",
       github: null,
@@ -121,7 +121,7 @@ export const ABOUT_DATA = {
       // Tone: factual, not braggy. "I own X, I built Y, I architected Z" — let the work speak.
       // This is your best resume line. Make it count.
       description:
-        "[Rewrite: describe the Mac Mini fleet, full ownership of apps, architectural decisions — see TODO above]",
+        "",
       technologies: ["React", "Next.js", "TypeScript", "Tailwind", "Go", "tRPC", "Prisma", "Docker", "NixOS"],
     },
     {
@@ -168,7 +168,7 @@ export const ABOUT_DATA = {
       // Even "Built internal tooling for a cybersecurity startup at 17" is better than what's here.
       // 1-2 sentences, specific. What was the product? What was your contribution?
       description:
-        "[Rewrite: what did you actually build here? You were 17. Be specific — see TODO above]",
+        "",
       technologies: [
         "Angular",
         "TypeScript",
@@ -191,7 +191,7 @@ export const ABOUT_DATA = {
     // Option C (just the facts): "Computer Science and Economics, 2.5 years"
     // Being direct about leaving seems more on-brand for you than "coursework towards" which sounds evasive.
     description:
-      "[Rewrite: you left RPI in Dec 2024 to move to BA — be direct about it, pick a framing above or write your own]",
+      "",
   },
 
   whatImInto: {
@@ -232,7 +232,7 @@ export const ABOUT_DATA = {
     // Mention: everything managed from a single git repo, Nix flakes, 6000+ lines of config.
     // Tone: matter-of-fact enthusiasm. You're not bragging — you genuinely enjoy this.
     intro:
-      "[Write: why you self-host, why Nix, why you run all this — your infrastructure philosophy in 2-3 sentences]",
+      "",
 
     machines: [
       {
@@ -243,7 +243,7 @@ export const ABOUT_DATA = {
         // TODO: Write a one-liner that captures what harbor is. Something like:
         // "The workhorse — runs 20+ services from media streaming to LLM inference, all on ZFS."
         highlight:
-          "[Write: one-line summary of what harbor does — 20+ services, ZFS, GPU transcoding]",
+          "",
         details: [
           "Intel i5-13600K, 64GB RAM, GTX 1660 Ti",
           "8 ZFS pools with automated snapshots (hourly/daily/monthly)",
@@ -261,7 +261,7 @@ export const ABOUT_DATA = {
         // TODO: Write a one-liner. Something like:
         // "RackNerd VPS in NYC — reverse proxy, WireGuard endpoint, Headscale coordination server."
         highlight:
-          "[Write: one-line summary — VPS gateway, WireGuard tunnel from BA to NYC, reverse proxy]",
+          "",
         details: [
           "RackNerd VPS with static IP, BBR congestion control tuned for BA↔NYC",
           "WireGuard tunnel to harbor for secure service exposure",
@@ -279,7 +279,7 @@ export const ABOUT_DATA = {
         // TODO: Write a one-liner. This is the crowd-pleaser — lean into it. Something like:
         // "A cracked-screen Pixel 6 Pro running NixOS via pKVM. Yes, it hosts this website."
         highlight:
-          "[Write: one-line summary — the Pixel phone server story, it hosts your website]",
+          "",
         details: [
           "Pixel 6 Pro (Tensor GS101) — cracked screen, repurposed as headless server",
           "LineageOS → pKVM hypervisor → NixOS VM → Docker containers",
@@ -297,7 +297,7 @@ export const ABOUT_DATA = {
         // TODO: Write a one-liner. Something like:
         // "Apple Silicon Mac with nix-darwin, tiling WM, and 90+ disabled telemetry daemons."
         highlight:
-          "[Write: one-line summary — privacy-hardened Mac, nix-darwin, custom Swift apps, Yabai]",
+          "",
         details: [
           "nix-darwin with Nix flakes — fully declarative macOS configuration",
           "Yabai tiling window manager + skhd hotkey daemon",
@@ -315,7 +315,7 @@ export const ABOUT_DATA = {
         // TODO: Write a one-liner. Something like:
         // "NixOS desktops with Hyprland, a custom tmux dashboard, and hardware-level device control."
         highlight:
-          "[Write: one-line summary — Hyprland desktops with custom dashboard, USB device toggling]",
+          "",
         details: [
           "Hyprland tiling Wayland compositor — zero-gap, minimal animations",
           "Custom tmux dashboard: ASCII clock, btop, exchange rates, weather, server health",
@@ -335,42 +335,42 @@ export const ABOUT_DATA = {
         // TODO: One line on why you built it. Something like:
         // "Watchtower was too dumb — it would update containers without backing up their databases first."
         context:
-          "[Write: why you built this instead of using Watchtower — what was the problem?]",
+          "",
       },
       {
         name: "Foyer",
         description:
           "Custom server dashboard showing service links, health status, and Jellyfin library stats. Runs on harbor, conduit, and raven.",
         context:
-          "[Write: why a custom dashboard? What do you use it for day-to-day?]",
+          "",
       },
       {
         name: "raven-status",
         description:
           "Hardware monitor for the Pixel server — battery health, voltage, cycle count, CPU thermals per cluster (BIG/MID/LITTLE), GPU/TPU temps. Live refresh mode.",
         context:
-          "[Write: one line — 'Built to monitor a phone that's running 24/7 as a server without a screen.']",
+          "",
       },
       {
         name: "Dashboard TUI",
         description:
           "tmux-based system dashboard combining ASCII clock, btop, ARS/BRL exchange rates, weather, server health, and wallpaper info. Scroll wheel adjusts volume, hotkeys toggle mic/camera.",
         context:
-          "[Write: why tmux? What makes this better than a regular system monitor?]",
+          "",
       },
       {
         name: "usb-toggle",
         description:
           "Toggle USB devices (mic, camera) at the hardware level via /sys/bus/usb/*/authorized. Devices deauthorized on plug-in by default.",
         context:
-          "[Write: privacy motivation? 'I don't trust software mute — this cuts power to the device.']",
+          "",
       },
       {
         name: "macOS Panels",
         description:
           "Suite of custom Swift apps for macOS: volume, brightness, bluetooth, wifi, and search panels. Replaces macOS system HUD with minimal overlays.",
         context:
-          "[Write: why custom panels? The macOS defaults didn't do what you wanted?]",
+          "",
       },
     ],
 
@@ -380,7 +380,7 @@ export const ABOUT_DATA = {
     // Cloudflare tunnels on conduit and raven for secure internet exposure without opening ports.
     // All of this so you can access everything from anywhere via Tailscale, and expose select services publicly.
     networkingDescription:
-      "[Write: the networking story — WireGuard tunnel, Headscale mesh, Cloudflare tunnels, why this architecture]",
+      "",
 
     // TODO: Write a closing thought. The angle:
     // Everything in one git repo. `nixos-rebuild switch` and a machine is configured.
@@ -388,7 +388,7 @@ export const ABOUT_DATA = {
     // This isn't a hobby — it's how you actually run your digital life.
     // Maybe mention the line count (6000+) or that it spans macOS + Linux + Android.
     philosophy:
-      "[Write: closing thought — one repo, declarative everything, reproducible across platforms. This is how you run your digital life.]",
+      "",
   },
 
   music: {
@@ -398,7 +398,7 @@ export const ABOUT_DATA = {
     // Mention: you actively de-anglicize your listening — French pop, Argentine rock, Brazilian music.
     // Tone: personal, not a music review. Why do you listen to what you listen to?
     intro:
-      "[Write: what music means to you — atmosphere over force, mono no aware, de-anglicizing your ears. 2-3 sentences.]",
+      "",
 
     stats: {
       songs: "11K",
@@ -410,7 +410,7 @@ export const ABOUT_DATA = {
       // Françoise Hardy, Fishmans (Long Season), Jumo — the "mono no aware" tier.
       // What is it about this sound? The fleeting beauty, impermanence, atmosphere.
       description:
-        "[Write: why these artists hit different — the mono no aware feeling, atmosphere over force]",
+        "",
       artists: ["Françoise Hardy", "Fishmans", "Jumo"],
     },
 

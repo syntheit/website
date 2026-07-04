@@ -1,3 +1,5 @@
+import { draftCopy } from "@/lib/utils";
+
 interface Experience {
   title: string;
   company: string;
@@ -41,9 +43,11 @@ export function ExperienceSection({
             <p className="mt-1 text-[13px] text-muted-foreground">
               {exp.period}
             </p>
-            <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
-              {exp.description}
-            </p>
+            {draftCopy(exp.description) && (
+              <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
+                {exp.description}
+              </p>
+            )}
             {exp.technologies && (
               <div className="mt-3 flex flex-wrap gap-[6px]">
                 {exp.technologies.map((t) => (
@@ -70,9 +74,11 @@ export function ExperienceSection({
           <p className="mt-1 text-[13px] text-muted-foreground">
             {education.period}
           </p>
-          <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
-            {education.description}
-          </p>
+          {draftCopy(education.description) && (
+            <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
+              {education.description}
+            </p>
+          )}
         </div>
       </div>
 

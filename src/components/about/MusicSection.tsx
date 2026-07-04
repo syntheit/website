@@ -1,3 +1,5 @@
+import { draftCopy } from "@/lib/utils";
+
 interface Genre {
   name: string;
   artists: string[];
@@ -55,9 +57,11 @@ export function MusicSection({
             </span>
           </div>
         </div>
-        <p className="text-[15px] leading-[1.75] text-muted-foreground max-w-[680px]">
-          {intro}
-        </p>
+        {draftCopy(intro) && (
+          <p className="text-[15px] leading-[1.75] text-muted-foreground max-w-[680px]">
+            {intro}
+          </p>
+        )}
       </div>
 
       {/* Soul tier */}
@@ -65,9 +69,11 @@ export function MusicSection({
         <h3 className="text-[11px] uppercase tracking-[1.5px] text-primary font-semibold">
           Speaks to My Soul
         </h3>
-        <p className="text-[14px] leading-[1.75] text-muted-foreground">
-          {soulTier.description}
-        </p>
+        {draftCopy(soulTier.description) && (
+          <p className="text-[14px] leading-[1.75] text-muted-foreground">
+            {soulTier.description}
+          </p>
+        )}
         <div className="flex flex-wrap gap-2">
           {soulTier.artists.map((artist) => (
             <span

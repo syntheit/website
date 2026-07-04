@@ -1,3 +1,5 @@
+import { draftCopy } from "@/lib/utils";
+
 interface Project {
   title: string;
   category: string;
@@ -42,9 +44,11 @@ export function OtherProjects({ projects }: OtherProjectsProps) {
             <h3 className="mb-[6px] font-serif text-[17px] font-bold">
               {project.title}
             </h3>
-            <p className="mb-4 text-[13px] leading-relaxed text-muted-foreground">
-              {project.description}
-            </p>
+            {draftCopy(project.description) && (
+              <p className="mb-4 text-[13px] leading-relaxed text-muted-foreground">
+                {project.description}
+              </p>
+            )}
 
             <div className="mb-4 flex flex-wrap gap-[6px]">
               {project.tech.map((t) => (

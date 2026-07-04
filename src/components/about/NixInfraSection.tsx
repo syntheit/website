@@ -1,4 +1,5 @@
 import { Server, Monitor, Smartphone, Globe, Cpu } from "lucide-react";
+import { draftCopy } from "@/lib/utils";
 
 const iconMap: Record<string, React.ElementType> = {
   server: Server,
@@ -53,9 +54,11 @@ function MachineCard({ machine }: { machine: Machine }) {
         </span>
       </div>
 
-      <p className="text-[14px] font-medium text-foreground leading-[1.6]">
-        {machine.highlight}
-      </p>
+      {draftCopy(machine.highlight) && (
+        <p className="text-[14px] font-medium text-foreground leading-[1.6]">
+          {machine.highlight}
+        </p>
+      )}
 
       <ul className="space-y-1.5">
         {machine.details.map((detail, i) => (
@@ -92,9 +95,11 @@ function ToolCard({ tool }: { tool: CustomTool }) {
       <p className="text-[13px] text-muted-foreground leading-[1.6]">
         {tool.description}
       </p>
-      <p className="text-[12px] text-muted-foreground/60 italic">
-        {tool.context}
-      </p>
+      {draftCopy(tool.context) && (
+        <p className="text-[12px] text-muted-foreground/60 italic">
+          {tool.context}
+        </p>
+      )}
     </div>
   );
 }
@@ -112,9 +117,11 @@ export function NixInfraSection({
         <h2 className="font-serif text-[32px] font-extrabold tracking-tight">
           Infrastructure &amp; Nix
         </h2>
-        <p className="text-[15px] leading-[1.75] text-muted-foreground max-w-[680px]">
-          {intro}
-        </p>
+        {draftCopy(intro) && (
+          <p className="text-[15px] leading-[1.75] text-muted-foreground max-w-[680px]">
+            {intro}
+          </p>
+        )}
       </div>
 
       {/* Machine Fleet */}
@@ -130,14 +137,16 @@ export function NixInfraSection({
       </div>
 
       {/* Networking */}
-      <div className="space-y-3">
-        <h3 className="text-[11px] uppercase tracking-[1.5px] text-primary font-semibold">
-          Networking
-        </h3>
-        <p className="text-[14px] leading-[1.75] text-muted-foreground max-w-[680px]">
-          {networkingDescription}
-        </p>
-      </div>
+      {draftCopy(networkingDescription) && (
+        <div className="space-y-3">
+          <h3 className="text-[11px] uppercase tracking-[1.5px] text-primary font-semibold">
+            Networking
+          </h3>
+          <p className="text-[14px] leading-[1.75] text-muted-foreground max-w-[680px]">
+            {networkingDescription}
+          </p>
+        </div>
+      )}
 
       {/* Custom Tools */}
       <div className="space-y-4">
@@ -152,11 +161,13 @@ export function NixInfraSection({
       </div>
 
       {/* Philosophy */}
-      <div className="rounded-2xl border border-border bg-card/40 p-6">
-        <p className="text-[14px] leading-[1.75] text-muted-foreground">
-          {philosophy}
-        </p>
-      </div>
+      {draftCopy(philosophy) && (
+        <div className="rounded-2xl border border-border bg-card/40 p-6">
+          <p className="text-[14px] leading-[1.75] text-muted-foreground">
+            {philosophy}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

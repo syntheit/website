@@ -264,7 +264,9 @@ export default function LanguagesPage() {
       {/* Stripe Divider */}
       <StripeDivider />
 
-      {/* My Approach */}
+      {/* My Approach — dev-only until the copy is written; never ships as a placeholder. */}
+      {process.env.NODE_ENV !== "production" && (
+      <>
       <section className="px-8 md:px-14 py-16">
         <h2 className="font-serif text-[32px] font-extrabold mb-8 tracking-tight">
           My Approach
@@ -291,6 +293,8 @@ export default function LanguagesPage() {
 
       {/* Stripe Divider (reversed) */}
       <StripeDivider reversed />
+      </>
+      )}
 
       {/* Roadmap */}
       <section className="px-8 md:px-14 py-16">
