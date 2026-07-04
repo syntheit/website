@@ -1,0 +1,10 @@
+{
+  "_schema": "Hand-written notes per place, keyed by place id. The enrich script merges these into places.json so they survive resolver re-runs. Example entry:",
+  "_example": {
+    "p_95bccb55c4cdcdc7_6c0b48e9b6abca0f": {
+      "note": "Best parrilla in BA. Get the mollejas and the napolitana. Book a week ahead.",
+      "rating": 5,
+      "lastVisited": "2026-04"
+    }
+  }
+}
