@@ -9,6 +9,7 @@ interface ResourceGridProps {
   onLoadMore: () => void;
   searchQuery: string;
   activeTabName: string;
+  onTopicClick?: (topic: string) => void;
 }
 
 export function ResourceGrid({
@@ -17,6 +18,7 @@ export function ResourceGrid({
   onLoadMore,
   searchQuery,
   activeTabName,
+  onTopicClick,
 }: ResourceGridProps) {
   const displayedResources = resources.slice(0, displayedCount);
   const hasMoreResources = displayedCount < resources.length;
@@ -50,7 +52,11 @@ export function ResourceGrid({
       {/* Grid */}
       <div className="grid gap-[22px] grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {displayedResources.map((resource, index) => (
-          <ResourceCard key={index} resource={resource} />
+          <ResourceCard
+            key={resource.id ?? index}
+            resource={resource}
+            onTopicClick={onTopicClick}
+          />
         ))}
       </div>
 

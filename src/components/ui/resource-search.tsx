@@ -5,15 +5,11 @@ import { Search, X } from "lucide-react";
 interface ResourceSearchProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  searchResultsCount: number;
-  activeTabName: string;
 }
 
 export function ResourceSearch({
   searchQuery,
   onSearchChange,
-  searchResultsCount,
-  activeTabName,
 }: ResourceSearchProps) {
   return (
     <div className="flex-1 min-w-0 basis-full sm:basis-0 relative">

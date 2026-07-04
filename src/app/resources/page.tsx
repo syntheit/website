@@ -60,8 +60,6 @@ export default function ResourcesPage() {
             <ResourceSearch
               searchQuery={searchQuery}
               onSearchChange={handleSearchChange}
-              searchResultsCount={searchResults.length}
-              activeTabName={activeTabName}
             />
             <RandomResourceSelector allResources={getAllResources()} />
           </div>
@@ -78,6 +76,7 @@ export default function ResourcesPage() {
             onLoadMore={handleLoadMore}
             searchQuery={searchQuery}
             activeTabName={activeTabName}
+            onTopicClick={(t) => handleSearchChange(t)}
           />
         </section>
 

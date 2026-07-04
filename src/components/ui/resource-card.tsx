@@ -4,19 +4,26 @@ import { ExternalLink, Copy, Check } from "lucide-react";
 import { useState } from "react";
 
 export type Resource = {
+  id?: string;
   title: string;
   description: string;
   url: string;
   category?: string;
+  topics?: string[];
   featured?: boolean;
 };
 
 interface ResourceCardProps {
   resource: Resource;
   className?: string;
+  onTopicClick?: (topic: string) => void;
 }
 
-export function ResourceCard({ resource, className = "" }: ResourceCardProps) {
+export function ResourceCard({
+  resource,
+  className = "",
+  onTopicClick,
+}: ResourceCardProps) {
   const [copied, setCopied] = useState(false);
 
   const getDisplayUrl = (url: string) => {
@@ -48,14 +55,38 @@ export function ResourceCard({ resource, className = "" }: ResourceCardProps) {
           {resource.description}
         </p>
 
-        {/* Category tag */}
-        {resource.category && (
-          <div className="mt-3">
-            <span className="inline-block text-[11px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold px-2 py-[3px] bg-[rgba(212,88,26,0.08)] rounded">
-              {resource.category}
-            </span>
+        {/* Category + topics */}
+        {(resource.category != null && resource.category !== "") ||
+        (resource.topics?.length ?? 0) > 0 ? (
+          <div className="mt-3 flex flex-wrap items-center gap-[6px]">
+            {resource.category && (
+              <span className="inline-block text-[11px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold px-2 py-[3px] bg-[rgba(212,88,26,0.08)] rounded">
+                {resource.category}
+              </span>
+            )}
+            {(resource.topics ?? []).slice(0, 4).map((t) =>
+              onTopicClick ? (
+                <button
+                  key={t}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onTopicClick(t);
+                  }}
+                  className="cursor-pointer text-[10px] text-[#7A5C42] bg-[rgba(59,35,20,0.06)] hover:bg-[rgba(212,88,26,0.15)] hover:text-[#D4581A] px-[7px] py-[2px] rounded-full font-mono transition-colors"
+                >
+                  {t}
+                </button>
+              ) : (
+                <span
+                  key={t}
+                  className="text-[10px] text-[#7A5C42] bg-[rgba(59,35,20,0.06)] px-[7px] py-[2px] rounded-full font-mono"
+                >
+                  {t}
+                </span>
+              ),
+            )}
           </div>
-        )}
+        ) : null}
 
         {/* Spacer */}
         <div className="flex-1" />

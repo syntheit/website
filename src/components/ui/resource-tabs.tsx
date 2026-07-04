@@ -3,7 +3,7 @@
 interface Tab {
   id: string;
   name: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon?: React.ComponentType<{ className?: string }>;
   count: number;
 }
 

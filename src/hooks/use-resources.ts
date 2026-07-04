@@ -1,113 +1,155 @@
-import { useState, useEffect } from "react";
-import { tabs, resources } from "@/app/metadata/resources";
-import type { Resource } from "@/components/ui/resource-card";
+import { useState, useEffect, useMemo } from "react";
+import {
+  ALL_RESOURCES,
+  type EnrichedResource,
+} from "@/lib/resources";
+
+// Display-side resource shape — adds the topics field so cards can render
+// the per-resource tag chips from the enrichment.
+export interface Resource {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  category: string;
+  topics: string[];
+}
+
+// Tabs that match the enriched data's `category` taxonomy. Each tab's count
+// is derived live from the dataset.
+const TAB_DEFS: { id: string; name: string }[] = [
+  { id: "all", name: "All Resources" },
+  { id: "wikipedia", name: "Wikipedia" },
+  { id: "articles", name: "Articles" },
+  { id: "technology", name: "Technology" },
+  { id: "youtube", name: "YouTube" },
+  { id: "travel", name: "Travel" },
+  { id: "coding", name: "Coding" },
+  { id: "languages", name: "Languages" },
+  { id: "geography", name: "Geography" },
+  { id: "business", name: "Business" },
+  { id: "history", name: "History" },
+  { id: "games", name: "Games" },
+  { id: "podcasts", name: "Podcasts" },
+  { id: "health", name: "Health" },
+  { id: "random", name: "Random" },
+];
+
+function toDisplayResource(r: EnrichedResource): Resource {
+  return {
+    id: r.id,
+    title: r.title,
+    description: r.description,
+    url: r.url,
+    category: r.category,
+    topics: r.topics,
+  };
+}
+
+// Deterministic shuffle keyed by id — same order across reloads within a
+// tab, different per session. Mulberry32-style hash so SSR/CSR match.
+function bandShuffle(items: EnrichedResource[], seed: number): EnrichedResource[] {
+  const tagged = items.map((r) => {
+    let h = seed;
+    for (let i = 0; i < r.id.length; i++) {
+      h = ((h << 5) - h + r.id.charCodeAt(i)) | 0;
+    }
+    return { r, k: h >>> 0 };
+  });
+  tagged.sort((a, b) => a.k - b.k);
+  return tagged.map((t) => t.r);
+}
 
 export function useResources() {
   const [activeTab, setActiveTab] = useState("all");
-  const [shuffledResources, setShuffledResources] = useState<Resource[]>([]);
   const [displayedCount, setDisplayedCount] = useState(12);
   const [searchQuery, setSearchQuery] = useState("");
+  const [shuffleSeed, setShuffleSeed] = useState(1);
 
-  // Get all resources from all categories
-  const getAllResources = (): Resource[] => {
-    const allResources: Resource[] = [];
-    Object.entries(resources).forEach(([categoryId, categoryResources]) => {
-      const categoryName = tabs.find(tab => tab.id === categoryId)?.name ?? categoryId;
-      categoryResources.forEach((resource: Resource) => {
-        allResources.push({
-          ...resource,
-          category: resource.category ?? categoryName,
-          featured: resource.featured ?? false
-        });
-      });
-    });
-    return allResources;
-  };
-
-  // Calculate dynamic counts for each tab
-  const tabsWithCounts = tabs.map(tab => ({
-    ...tab,
-    count: tab.id === "all" ? getAllResources().length : resources[tab.id as keyof typeof resources]?.length ?? 0
-  }));
-
-  // Search functionality
-  const searchResources = (query: string, categoryResources: Resource[]): Resource[] => {
-    if (!query.trim()) return categoryResources;
-    
-    const searchTerm = query.toLowerCase();
-    
-    return categoryResources.filter(resource => 
-      resource.title.toLowerCase().includes(searchTerm) ||
-      resource.description.toLowerCase().includes(searchTerm) ||
-      (resource.category?.toLowerCase().includes(searchTerm) ?? false) ||
-      resource.url.toLowerCase().includes(searchTerm)
-    );
-  };
-
-  const searchResults = searchResources(searchQuery, shuffledResources);
-
-  // Initialize active tab from URL hash on mount
+  // Re-roll the shuffle once per page load. Done in an effect so SSR sees
+  // a stable seed=1 and there's no hydration mismatch.
   useEffect(() => {
-    const hash = window.location.hash.slice(1); // Remove the # symbol
-    if (hash && tabs.some(tab => tab.id === hash)) {
-      setActiveTab(hash);
-    }
+    setShuffleSeed(Math.floor(Math.random() * 0x7fffffff) || 1);
   }, []);
 
-  // Update URL hash when active tab changes
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.location.hash = activeTab;
+  // Pre-sort each quality band, shuffled within. High → medium → low.
+  const sortedAll = useMemo(() => {
+    const bands: Record<"high" | "medium" | "low", EnrichedResource[]> = {
+      high: [],
+      medium: [],
+      low: [],
+    };
+    for (const r of ALL_RESOURCES) bands[r.quality].push(r);
+    return [
+      ...bandShuffle(bands.high, shuffleSeed),
+      ...bandShuffle(bands.medium, shuffleSeed + 1),
+      ...bandShuffle(bands.low, shuffleSeed + 2),
+    ];
+  }, [shuffleSeed]);
+
+  // Live counts per tab — drives the pill labels.
+  const tabsWithCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: ALL_RESOURCES.length };
+    for (const r of ALL_RESOURCES) {
+      counts[r.category] = (counts[r.category] ?? 0) + 1;
     }
+    return TAB_DEFS.filter(
+      (t) => t.id === "all" || (counts[t.id] ?? 0) > 0,
+    ).map((t) => ({ ...t, count: counts[t.id] ?? 0 }));
+  }, []);
+
+  // Filter to active tab, then run search.
+  const filtered = useMemo(() => {
+    const inTab =
+      activeTab === "all"
+        ? sortedAll
+        : sortedAll.filter((r) => r.category === activeTab);
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return inTab.map(toDisplayResource);
+    return inTab
+      .filter(
+        (r) =>
+          r.title.toLowerCase().includes(q) ||
+          r.description.toLowerCase().includes(q) ||
+          r.category.toLowerCase().includes(q) ||
+          r.url.toLowerCase().includes(q) ||
+          r.topics.some((t) => t.toLowerCase().includes(q)),
+      )
+      .map(toDisplayResource);
+  }, [activeTab, searchQuery, sortedAll]);
+
+  // Random-resource selector wants the whole catalog flat.
+  const getAllResources = (): Resource[] => sortedAll.map(toDisplayResource);
+
+  // URL hash for tab persistence — keep existing behavior.
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash && TAB_DEFS.some((t) => t.id === hash)) setActiveTab(hash);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") window.location.hash = activeTab;
   }, [activeTab]);
 
-  // Shuffle resources on client side only
-  useEffect(() => {
-    let categoryResources: Resource[] = [];
-    
-    if (activeTab === "all") {
-      // Get all resources from all categories
-      categoryResources = getAllResources();
-    } else {
-      // Get resources from specific category and ensure they have required properties
-      const rawResources = resources[activeTab as keyof typeof resources] || [];
-      const categoryName = tabs.find(tab => tab.id === activeTab)?.name ?? activeTab;
-      categoryResources = rawResources.map((resource: Resource) => ({
-        ...resource,
-        category: resource.category ?? categoryName,
-        featured: resource.featured ?? false
-      }));
-    }
-    
-    const featured = categoryResources.filter(resource => resource.featured);
-    const nonFeatured = categoryResources.filter(resource => !resource.featured);
-    
-    // Shuffle non-featured resources
-    const shuffledNonFeatured = [...nonFeatured].sort(() => Math.random() - 0.5);
-    
-    setShuffledResources([...featured, ...shuffledNonFeatured]);
-    setDisplayedCount(12); // Reset displayed count when changing tabs
-  }, [activeTab]);
-
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-    setDisplayedCount(12); // Reset displayed count when searching
+  const handleSearchChange = (q: string) => {
+    setSearchQuery(q);
+    setDisplayedCount(12);
   };
 
   const handleLoadMore = () => {
-    setDisplayedCount(prev => Math.min(prev + 12, searchResults.length));
+    setDisplayedCount((n) => Math.min(n + 12, filtered.length));
   };
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId);
+    setDisplayedCount(12);
   };
 
   return {
     activeTab,
-    shuffledResources,
     displayedCount,
     searchQuery,
-    searchResults,
+    searchResults: filtered,
     tabsWithCounts,
     getAllResources,
     handleSearchChange,
