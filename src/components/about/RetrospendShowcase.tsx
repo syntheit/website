@@ -11,6 +11,9 @@ export function RetrospendShowcase({
   tech,
   links,
 }: RetrospendShowcaseProps) {
+  // Dev-only until real screenshots exist — prod collapses to one column
+  // instead of shipping a "coming soon" box.
+  const showScreenshotPlaceholder = process.env.NODE_ENV !== "production";
   return (
     <div className="space-y-8">
       <div>
@@ -22,7 +25,13 @@ export function RetrospendShowcase({
         </p>
       </div>
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
+      <div
+        className={
+          showScreenshotPlaceholder
+            ? "grid gap-10 lg:grid-cols-[1fr_380px]"
+            : "grid gap-10"
+        }
+      >
         {/* Left: text */}
         <div className="space-y-6">
           <p className="text-[15px] leading-[1.75] text-muted-foreground">
@@ -74,14 +83,16 @@ export function RetrospendShowcase({
           </div>
         </div>
 
-        {/* Right: screenshot placeholder */}
-        <div className="flex items-start justify-center">
-          <div className="flex h-[300px] w-full items-center justify-center rounded-2xl border-[1.5px] border-[rgba(59,35,20,0.08)] bg-card">
-            <p className="text-[14px] italic text-muted-foreground">
-              Screenshots coming soon
-            </p>
+        {/* Right: screenshot placeholder (dev-only) */}
+        {showScreenshotPlaceholder && (
+          <div className="flex items-start justify-center">
+            <div className="flex h-[300px] w-full items-center justify-center rounded-2xl border-[1.5px] border-[rgba(59,35,20,0.08)] bg-card">
+              <p className="text-[14px] italic text-muted-foreground">
+                Screenshots coming soon
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
