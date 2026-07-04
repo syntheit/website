@@ -1,14 +1,12 @@
-"use client";
-
 import { Navbar } from "@/components/ui/navbar";
-import { photos } from "@/data/photos";
+import { RandomPhotoButton } from "@/components/ui/random-photo-button";
+import { getPhotos } from "@/lib/photos";
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
 
-interface PexelsPhoto {
-  pexels_url: string;
-}
+// ISR — page rebuilds at most once an hour even when the Pexels collection
+// changes. Run a fresh build to pick up changes sooner.
+export const revalidate = 3600;
 
 const gear = {
   cameras: [
@@ -69,25 +67,8 @@ function GearGroup({
   );
 }
 
-export default function PhotographyPage() {
-  const pexelsPhotosRef = useRef<PexelsPhoto[] | null>(null);
-
-  const handleRandomPhoto = async () => {
-    try {
-      if (!pexelsPhotosRef.current) {
-        const response = await fetch("/data/photos.json");
-        pexelsPhotosRef.current = (await response.json()) as PexelsPhoto[];
-      }
-      const allPhotos = pexelsPhotosRef.current;
-      if (!allPhotos || allPhotos.length === 0) return;
-      const random = allPhotos[Math.floor(Math.random() * allPhotos.length)];
-      if (random?.pexels_url) {
-        window.open(random.pexels_url, "_blank", "noopener,noreferrer");
-      }
-    } catch (error) {
-      console.error("Failed to load random photo:", error);
-    }
-  };
+export default async function PhotographyPage() {
+  const photos = await getPhotos();
 
   return (
     <main className="flex flex-col min-h-screen bg-background">
@@ -107,19 +88,14 @@ export default function PhotographyPage() {
       {/* Links Row */}
       <div className="flex justify-center items-center gap-3 px-4 sm:px-8 md:px-14 pt-6 pb-12">
         <Link
-          href="https://www.pexels.com/@daniel-miller-2106839/highlights/"
+          href="https://www.pexels.com/@daniel-miller-2106839"
           target="_blank"
           rel="noopener noreferrer"
           className="px-5 py-2.5 border-[1.5px] border-foreground rounded-full text-foreground text-[13px] font-medium hover:bg-foreground hover:text-card transition-all duration-200"
         >
           View all on Pexels
         </Link>
-        <button
-          onClick={handleRandomPhoto}
-          className="cursor-pointer px-5 py-2.5 bg-primary text-white border-[1.5px] border-primary rounded-full text-[13px] font-medium hover:bg-[#b84a15] hover:border-[#b84a15] transition-all duration-200"
-        >
-          Random Photo
-        </button>
+        <RandomPhotoButton photos={photos} />
       </div>
 
       {/* Photo Gallery */}
@@ -132,33 +108,38 @@ export default function PhotographyPage() {
         </div>
 
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4">
-          {photos.map((photo, i) => (
-            <div
-              key={i}
-              className="break-inside-avoid mb-4 rounded-xl overflow-hidden relative group cursor-pointer bg-card"
+          {photos.map((photo) => (
+            <a
+              key={photo.id}
+              href={photo.pexels_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block break-inside-avoid mb-4 rounded-xl overflow-hidden relative group bg-card"
             >
               <Image
-                src={photo.src}
-                alt={photo.alt}
+                src={photo.image_url}
+                alt={photo.description?.trim() ? photo.description : photo.location ?? `Pexels photo ${photo.id}`}
                 width={photo.width}
                 height={photo.height}
-                className="w-full block"
+                className="w-full block h-auto"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
-              {/* Hover gradient overlay */}
-              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-[rgba(59,35,20,0.5)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[250ms] pointer-events-none" />
-              {/* Location label */}
-              <div className="absolute bottom-4 left-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-[250ms]">
-                <span className="text-xs text-white font-medium [text-shadow:0_1px_3px_rgba(0,0,0,0.3)]">
-                  {photo.location}
+              <div className="absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-[rgba(59,35,20,0.55)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[250ms] pointer-events-none" />
+              <div className="absolute inset-x-4 bottom-4 z-10 flex items-end justify-between gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-[250ms]">
+                <span className="text-xs text-white font-medium [text-shadow:0_1px_3px_rgba(0,0,0,0.45)]">
+                  {photo.location ?? "View on Pexels →"}
                 </span>
+                {photo.location && (
+                  <span className="text-[11px] text-white/85 font-medium [text-shadow:0_1px_3px_rgba(0,0,0,0.45)] whitespace-nowrap">
+                    View on Pexels →
+                  </span>
+                )}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
 
-      {/* Stripe Divider */}
       <StripeDivider />
 
       {/* Gear Section */}
@@ -175,7 +156,6 @@ export default function PhotographyPage() {
         </div>
       </section>
 
-      {/* Stripe Divider (reversed) */}
       <StripeDivider reversed />
     </main>
   );
