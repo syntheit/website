@@ -2,14 +2,25 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'Daniel Miller - Software Engineer and Photographer'
+export const alt = 'Daniel Miller — Software engineer, photographer, and entrepreneur in Buenos Aires'
 export const size = {
   width: 1200,
   height: 630,
 }
 export const contentType = 'image/png'
 
+// Matches the site's design system (src/styles/globals.css): warm beige
+// background, dark brown text, burnt orange accent, stripe divider.
+const STRIPE_COLORS = ['#3B2314', '#D4581A', '#E8941A', '#E8C95A', '#F5EBD9']
+
 export default async function Image() {
+  // Embedded local asset — Satori can't decode webp, and fetching our own
+  // prod URL at render time is brittle. profile-og.png is a PNG copy of
+  // public/profile.webp.
+  const profile = await fetch(
+    new URL('../../public/profile-og.png', import.meta.url),
+  ).then((res) => res.arrayBuffer())
+
   return new ImageResponse(
     (
       <div
@@ -17,127 +28,129 @@ export default async function Image() {
           height: '100%',
           width: '100%',
           display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#0a0a0a',
-          backgroundImage: 'linear-gradient(135deg, #65c3ac 0%, #4a9b8a 50%, #2a5b46 100%)',
+          flexDirection: 'column',
+          backgroundColor: '#E8D5B7',
         }}
       >
-        {/* Left side - Profile image */}
         <div
           style={{
+            flex: 1,
             display: 'flex',
+            flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '40%',
-            height: '100%',
-            padding: '40px',
           }}
         >
+          {/* Left side - Profile image */}
           <div
             style={{
-              width: '300px',
-              height: '300px',
-              borderRadius: '50%',
-              border: '8px solid rgba(255, 255, 255, 0.2)',
-              overflow: 'hidden',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              width: '38%',
+              height: '100%',
+              padding: '40px',
             }}
           >
-            <img
-              src="https://matv.io/profile.webp"
-              alt="Daniel Miller"
+            <div
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
+                width: '300px',
+                height: '300px',
+                borderRadius: '50%',
+                border: '6px solid rgba(59, 35, 20, 0.15)',
+                overflow: 'hidden',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#F5EBD9',
               }}
-            />
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                // Satori accepts ArrayBuffer image sources; the string cast
+                // just satisfies the DOM typing.
+                src={profile as unknown as string}
+                alt="Daniel Miller"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Right side - Text content */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: '60%',
-            height: '100%',
-            padding: '40px',
-            color: 'white',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: '64px',
-              fontWeight: 'bold',
-              margin: '0 0 20px 0',
-              lineHeight: '1.1',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)',
-            }}
-          >
-            Daniel Miller
-          </h1>
-          <p
-            style={{
-              fontSize: '32px',
-              margin: '0 0 30px 0',
-              opacity: 0.9,
-              lineHeight: '1.3',
-              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.3)',
-            }}
-          >
-            Software Engineer & Photographer
-          </p>
+          {/* Right side - Text content */}
           <div
             style={{
               display: 'flex',
-              gap: '20px',
-              marginTop: '20px',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              width: '62%',
+              height: '100%',
+              padding: '40px 60px 40px 20px',
             }}
           >
-            <div
+            <h1
               style={{
-                padding: '12px 24px',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                borderRadius: '8px',
-                fontSize: '20px',
-                fontWeight: '500',
-                backdropFilter: 'blur(10px)',
+                fontSize: '72px',
+                fontWeight: 800,
+                margin: '0 0 16px 0',
+                lineHeight: 1.1,
+                color: '#3B2314',
+                letterSpacing: '-2px',
               }}
             >
-              Projects
-            </div>
-            <div
+              Daniel Miller
+            </h1>
+            <p
               style={{
-                padding: '12px 24px',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                borderRadius: '8px',
-                fontSize: '20px',
-                fontWeight: '500',
-                backdropFilter: 'blur(10px)',
+                fontSize: '28px',
+                margin: '0 0 32px 0',
+                lineHeight: 1.4,
+                color: '#7A5C42',
               }}
             >
-              Photography
-            </div>
+              Software engineer, photographer, and entrepreneur living in
+              Buenos Aires
+            </p>
             <div
               style={{
-                padding: '12px 24px',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                borderRadius: '8px',
-                fontSize: '20px',
-                fontWeight: '500',
-                backdropFilter: 'blur(10px)',
+                display: 'flex',
+                gap: '14px',
               }}
             >
-              Resources
+              {['World', 'Resources', 'Photography'].map((label) => (
+                <div
+                  key={label}
+                  style={{
+                    padding: '10px 24px',
+                    border: '2px solid #D4581A',
+                    borderRadius: '999px',
+                    fontSize: '20px',
+                    fontWeight: 600,
+                    color: '#D4581A',
+                  }}
+                >
+                  {label}
+                </div>
+              ))}
             </div>
           </div>
+        </div>
+
+        {/* Bottom stripe divider */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            height: '28px',
+            width: '100%',
+          }}
+        >
+          {STRIPE_COLORS.map((color) => (
+            <div key={color} style={{ flex: 1, backgroundColor: color }} />
+          ))}
         </div>
       </div>
     ),
@@ -145,4 +158,4 @@ export default async function Image() {
       ...size,
     }
   )
-} 
+}
