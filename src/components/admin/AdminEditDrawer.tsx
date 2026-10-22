@@ -35,9 +35,21 @@ interface FormState {
   rating: number | "";
   extraTagsText: string;
   hidden: boolean;
+  culture: string;
+  access: PlaceOverride["access"] | "";
+  telegram: string;
+  instagram: string;
+  googleMaps: string;
   /** Current effective list membership. Diffed against rawPlace.listIds on save. */
   listIds: string[];
 }
+
+const ACCESS_OPTIONS = [
+  { value: "walk-in", label: "Walk-in" },
+  { value: "message", label: "Message ahead" },
+  { value: "delivery", label: "Delivery" },
+  { value: "appointment", label: "By appointment" },
+] as const;
 
 function formFromOverride(
   ov: PlaceOverride | undefined,
@@ -52,6 +64,11 @@ function formFromOverride(
     rating: ov?.rating ?? "",
     extraTagsText: (ov?.extraTags ?? []).join(", "),
     hidden: Boolean(ov?.hidden),
+    culture: ov?.culture ?? "",
+    access: ov?.access ?? "",
+    telegram: ov?.contacts?.telegram ?? "",
+    instagram: ov?.contacts?.instagram ?? "",
+    googleMaps: ov?.contacts?.googleMaps ?? "",
     listIds: place.listIds,
   };
 }
@@ -68,6 +85,13 @@ function patchFromForm(form: FormState, place: Place, rawPlace: Place): Partial<
   const sameCategoriesAsAuto =
     form.customCategories.length === place.categories.length &&
     form.customCategories.every((c, i) => c === place.categories[i]);
+  const telegram = orUndef(form.telegram);
+  const instagram = orUndef(form.instagram);
+  const googleMaps = orUndef(form.googleMaps);
+  const hasContact =
+    telegram !== undefined ||
+    instagram !== undefined ||
+    googleMaps !== undefined;
   return {
     note: orUndef(form.note),
     internalNote: orUndef(form.internalNote),
@@ -79,6 +103,9 @@ function patchFromForm(form: FormState, place: Place, rawPlace: Place): Partial<
     statusOverride: form.statusOverride === "" ? undefined : form.statusOverride,
     rating: form.rating === "" ? undefined : Number(form.rating),
     extraTags: extraTags.length > 0 ? extraTags : undefined,
+    culture: orUndef(form.culture),
+    access: form.access === "" ? undefined : form.access,
+    contacts: hasContact ? { telegram, instagram, googleMaps } : undefined,
     ...computeListDelta(rawPlace.listIds, form.listIds),
     hidden: form.hidden,
   };
@@ -275,6 +302,59 @@ export function AdminEditDrawer({
             placeholder={place.name}
             className="w-full px-3 py-2 bg-white/70 border-[1.5px] border-[rgba(59,35,20,0.1)] rounded-md text-[12px]"
           />
+        </Section>
+
+        <div className="grid grid-cols-2 gap-3">
+          <Section label="Culture / cuisine">
+            <input
+              type="text"
+              value={form.culture}
+              onChange={(e) => update("culture", e.target.value)}
+              placeholder="e.g. korean"
+              className="w-full px-3 py-2 bg-white/70 border-[1.5px] border-[rgba(59,35,20,0.1)] rounded-md text-[12px] outline-none focus:border-[#D4581A]"
+            />
+          </Section>
+
+          <Section label="Access">
+            <Picker
+              value={form.access === "" ? undefined : form.access}
+              onChange={(v) =>
+                update("access", (v as PlaceOverride["access"]) ?? "")
+              }
+              options={ACCESS_OPTIONS.map((o) => ({
+                value: o.value,
+                label: o.label,
+              }))}
+              placeholder="(none)"
+              clearLabel="(none)"
+            />
+          </Section>
+        </div>
+
+        <Section label="Contacts">
+          <div className="space-y-2">
+            <input
+              type="text"
+              value={form.telegram}
+              onChange={(e) => update("telegram", e.target.value)}
+              placeholder="Telegram — @handle or link"
+              className="w-full px-3 py-2 bg-white/70 border-[1.5px] border-[rgba(59,35,20,0.1)] rounded-md text-[12px] outline-none focus:border-[#D4581A]"
+            />
+            <input
+              type="text"
+              value={form.instagram}
+              onChange={(e) => update("instagram", e.target.value)}
+              placeholder="Instagram — @handle or link"
+              className="w-full px-3 py-2 bg-white/70 border-[1.5px] border-[rgba(59,35,20,0.1)] rounded-md text-[12px] outline-none focus:border-[#D4581A]"
+            />
+            <input
+              type="text"
+              value={form.googleMaps}
+              onChange={(e) => update("googleMaps", e.target.value)}
+              placeholder="Google Maps URL"
+              className="w-full px-3 py-2 bg-white/70 border-[1.5px] border-[rgba(59,35,20,0.1)] rounded-md text-[12px] outline-none focus:border-[#D4581A]"
+            />
+          </div>
         </Section>
 
         <Section label="Tags (comma-separated, added on top of list-conferred)">

@@ -85,7 +85,15 @@ const TRIM_KEYS = [
   "lastVisited",
   "customName",
   "internalNote",
+  "culture",
 ] as const satisfies readonly (keyof PlaceOverride)[];
+
+const ACCESS_VALUES = [
+  "walk-in",
+  "message",
+  "delivery",
+  "appointment",
+] as const satisfies readonly NonNullable<PlaceOverride["access"]>[];
 
 function pruneOverride(ov: PlaceOverride): PlaceOverride | null {
   const out: PlaceOverride = {};
@@ -111,6 +119,16 @@ function pruneOverride(ov: PlaceOverride): PlaceOverride | null {
   if (typeof ov.publicByDefault === "boolean")
     out.publicByDefault = ov.publicByDefault;
   if (ov.hidden) out.hidden = true;
+  if (ov.access && (ACCESS_VALUES as readonly string[]).includes(ov.access))
+    out.access = ov.access;
+  if (ov.contacts) {
+    const c: NonNullable<PlaceOverride["contacts"]> = {};
+    for (const key of ["telegram", "instagram", "googleMaps"] as const) {
+      const v = ov.contacts[key];
+      if (typeof v === "string" && v.trim() !== "") c[key] = v.trim();
+    }
+    if (Object.keys(c).length > 0) out.contacts = c;
+  }
   if (Object.keys(out).length === 0) return null;
   out.updatedAt = new Date().toISOString();
   return out;

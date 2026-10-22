@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import type { PlaceFilter, PlaceStatus } from "@/types/world";
-import { publicPlaces, getPlace, bboxFromViewport } from "@/lib/world-places";
+import type { Place, PlaceFilter, PlaceStatus } from "@/types/world";
+import { bboxFromViewport, type Bbox } from "@/lib/world-places";
 import { filterPlaces } from "@/lib/place-filter";
 import { PlaceMap, type PlaceMapHandle } from "./PlaceMap";
 import { PlaceList } from "./PlaceList";
@@ -16,6 +16,8 @@ export interface AreaFilter {
 }
 
 interface Props {
+  /** Runtime-merged public places (base + admin overrides). */
+  places: Place[];
   /**
    * Filter applied at mount. To switch scope (e.g. country page → city page),
    * pass a different `key` so the component remounts cleanly rather than
@@ -34,6 +36,7 @@ function hasAnyFilter(f: PlaceFilter): boolean {
 }
 
 export function PlaceExplorer({
+  places,
   initialFilter = {},
   initialViewState,
   areaFilters,
@@ -43,10 +46,15 @@ export function PlaceExplorer({
   const [activeArea, setActiveArea] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [viewBounds, setViewBounds] = useState<Bbox | null>(null);
   const mapHandleRef = useRef<PlaceMapHandle | null>(null);
 
   const isScoped = Boolean(initialFilter.country ?? initialFilter.bbox);
-  const allPlaces = useMemo(() => publicPlaces(), []);
+  const allPlaces = places;
+  const placeById = useMemo(
+    () => new Map(places.map((p) => [p.id, p])),
+    [places],
+  );
 
   // ── URL state ────────────────────────────────────────────────────────
   // Hydrate filter/area from search params once on mount, then mirror state
@@ -112,6 +120,21 @@ export function PlaceExplorer({
     [allPlaces, effectiveFilter],
   );
 
+  // The list tracks the map viewport: it shows only the filtered places that
+  // are currently on screen, and re-narrows as you zoom/pan. The map itself
+  // still renders the full filtered set. Falls back to `filtered` until the
+  // map reports its first bounds.
+  const listPlaces = useMemo(() => {
+    if (!viewBounds) return filtered;
+    return filtered.filter(
+      (p) =>
+        p.lat >= viewBounds.minLat &&
+        p.lat <= viewBounds.maxLat &&
+        p.lng >= viewBounds.minLng &&
+        p.lng <= viewBounds.maxLng,
+    );
+  }, [filtered, viewBounds]);
+
   // Drop transient selection/hover state if the filter excludes them.
   useEffect(() => {
     const visible = (id: string | null) =>
@@ -120,7 +143,7 @@ export function PlaceExplorer({
     if (hoveredId && !visible(hoveredId)) setHoveredId(null);
   }, [filtered, selectedId, hoveredId]);
 
-  const selectedPlace = selectedId ? (getPlace(selectedId) ?? null) : null;
+  const selectedPlace = selectedId ? (placeById.get(selectedId) ?? null) : null;
 
   const handleAreaClick = (a: AreaFilter) => {
     if (activeArea === a.label) {
@@ -172,7 +195,7 @@ export function PlaceExplorer({
       <div className="flex flex-1 overflow-hidden relative">
         <div className="hidden md:flex w-[380px] shrink-0 border-r-[1.5px] border-[rgba(59,35,20,0.08)] bg-[#F5EBD9] flex-col">
           <PlaceList
-            places={filtered}
+            places={listPlaces}
             selectedId={selectedId}
             onSelect={setSelectedId}
             onHover={setHoveredId}
@@ -187,6 +210,7 @@ export function PlaceExplorer({
             onSelect={setSelectedId}
             onHover={setHoveredId}
             initialViewState={initialViewState}
+            onViewportChange={setViewBounds}
           />
         </div>
         {selectedPlace && (

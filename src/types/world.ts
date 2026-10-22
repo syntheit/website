@@ -20,6 +20,12 @@ export interface Place {
   note?: string;
   rating?: number;
   lastVisited?: string;
+  /** Admin-curated culture/cuisine slug, e.g. "korean". Override-only. */
+  culture?: string;
+  /** How to get in / order. Override-only. */
+  access?: "walk-in" | "message" | "delivery" | "appointment";
+  /** Admin-curated contact handles/links. Override-only. */
+  contacts?: { telegram?: string; instagram?: string; googleMaps?: string };
   /** Admin-only note; never rendered publicly. */
   internalNote?: string;
   /** ISO timestamp of last admin edit. */

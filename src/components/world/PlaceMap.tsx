@@ -21,7 +21,7 @@ import type {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Place } from "@/types/world";
-import { getPlace, categoryLabel, countryLabel } from "@/lib/world-places";
+import { categoryLabel, countryLabel } from "@/lib/world-places";
 import {
   CATEGORY_COLOR,
   UNCATEGORIZED_COLOR,
@@ -110,6 +110,14 @@ interface Props {
   onHover: (id: string | null) => void;
   initialViewState?: { longitude: number; latitude: number; zoom: number };
   autoFit?: boolean;
+  /** Fires on load and after every pan/zoom with the current map bounds, so the
+   *  list can narrow to what's actually on screen. */
+  onViewportChange?: (bounds: {
+    minLat: number;
+    maxLat: number;
+    minLng: number;
+    maxLng: number;
+  }) => void;
 }
 
 const SOURCE_ID = "places";
@@ -126,6 +134,7 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
     onHover,
     initialViewState,
     autoFit = true,
+    onViewportChange,
   },
   forwardedRef,
 ) {
@@ -154,6 +163,14 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
       },
     }),
     [],
+  );
+
+  // `Map` (the react-map-gl component) shadows the global constructor in this
+  // module, so build the lookup with the global explicitly.
+  const placeById = useMemo(
+    () =>
+      new globalThis.Map<string, Place>(places.map((p) => [p.id, p] as const)),
+    [places],
   );
 
   const geojson = useMemo(
@@ -199,10 +216,14 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
     );
   }, [places, autoFit]);
 
-  // Fly to selected place. Doesn't depend on the filtered set.
+  // Fly to selected place. Keyed on selectedId only — we don't want to re-fly
+  // when the places prop changes (e.g. a background revalidation), so the map
+  // is read from the ref rather than the reactive `placeById`.
+  const placeByIdRef = useRef(placeById);
+  placeByIdRef.current = placeById;
   useEffect(() => {
     if (!selectedId) return;
-    const place = getPlace(selectedId);
+    const place = placeByIdRef.current.get(selectedId);
     if (!place) return;
     const map = mapRef.current?.getMap();
     if (!map) return;
@@ -212,6 +233,28 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
       duration: 800,
     });
   }, [selectedId]);
+
+  // Report the visible bounds on load and after every move, so the list can
+  // track the viewport (zoom in → list narrows to what's on screen).
+  useEffect(() => {
+    const map = mapRef.current?.getMap();
+    if (!map || !onViewportChange) return;
+    const emit = () => {
+      const b = map.getBounds();
+      onViewportChange({
+        minLat: b.getSouth(),
+        maxLat: b.getNorth(),
+        minLng: b.getWest(),
+        maxLng: b.getEast(),
+      });
+    };
+    map.on("moveend", emit);
+    if (map.isStyleLoaded()) emit();
+    else void map.once("load", emit);
+    return () => {
+      map.off("moveend", emit);
+    };
+  }, [onViewportChange]);
 
   // Drive map highlight via feature-state — no paint re-evaluation, no React
   // churn from interaction state. Two effects, one per highlight kind. Each
@@ -399,7 +442,9 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
   // Hover popup, driven by hoveredId (set either by map mousemove or by list
   // hover). Suppressed when the hovered place is the selected one.
   const hoveredPlace =
-    hoveredId && hoveredId !== selectedId ? getPlace(hoveredId) : null;
+    hoveredId && hoveredId !== selectedId
+      ? (placeById.get(hoveredId) ?? null)
+      : null;
 
   return (
     <Map

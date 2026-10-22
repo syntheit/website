@@ -30,6 +30,12 @@ export interface PlaceOverride {
   removedLists?: string[];
   publicByDefault?: boolean;
   hidden?: boolean;
+  /** Culture/cuisine slug, e.g. "korean". Admin-set; not derived from Google. */
+  culture?: string;
+  /** How to get in / order. Admin-set. */
+  access?: "walk-in" | "message" | "delivery" | "appointment";
+  /** Contact handles/links. Admin-set. */
+  contacts?: { telegram?: string; instagram?: string; googleMaps?: string };
   internalNote?: string;
   updatedAt?: string;
 }
@@ -91,6 +97,9 @@ export function applyOverride(place: Place, ov: PlaceOverride | undefined): Plac
     note: ov.note ?? place.note,
     rating: ov.rating ?? place.rating,
     lastVisited: ov.lastVisited ?? place.lastVisited,
+    culture: ov.culture ?? place.culture,
+    access: ov.access ?? place.access,
+    contacts: ov.contacts ?? place.contacts,
     internalNote: ov.internalNote,
     updatedAt: ov.updatedAt,
   };

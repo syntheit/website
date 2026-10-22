@@ -35,8 +35,7 @@ function PlaceListInner({ places, selectedId, onSelect, onHover }: Props) {
             Places
           </div>
           <div className="font-mono text-[13px] text-[#3B2314]">
-            {places.length.toLocaleString()}{" "}
-            {places.length === 1 ? "match" : "matches"}
+            {places.length.toLocaleString()} in view
           </div>
         </div>
       </div>
@@ -47,7 +46,7 @@ function PlaceListInner({ places, selectedId, onSelect, onHover }: Props) {
       >
         {places.length === 0 ? (
           <div className="px-6 py-12 text-center text-[13px] text-[#7A5C42] italic">
-            No places match your filters.
+            No places in view. Zoom out or pan the map.
           </div>
         ) : (
           <ul>

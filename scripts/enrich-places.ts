@@ -69,6 +69,9 @@ function applyOverrideToEnriched(
     note: ov.note,
     rating: ov.rating,
     lastVisited: ov.lastVisited,
+    culture: ov.culture ?? base.culture,
+    access: ov.access ?? base.access,
+    contacts: ov.contacts ?? base.contacts,
     internalNote: ov.internalNote,
     updatedAt: ov.updatedAt,
   };
@@ -119,6 +122,9 @@ interface EnrichedPlace {
   note?: string;               // hand-written blurb (from overrides)
   rating?: number;             // 1-5 (from overrides)
   lastVisited?: string;        // YYYY-MM (from overrides)
+  culture?: string;            // culture/cuisine slug (from overrides), public
+  access?: "walk-in" | "message" | "delivery" | "appointment"; // (from overrides), public
+  contacts?: { telegram?: string; instagram?: string; googleMaps?: string }; // (from overrides), public
   internalNote?: string;       // admin-only, never read by public render
   updatedAt?: string;          // ISO timestamp of last admin edit
 }

@@ -1,14 +1,47 @@
 "use client";
 
 import { useEffect } from "react";
-import { X, ExternalLink, Copy, Heart, Check, Tag } from "lucide-react";
+import {
+  X,
+  ExternalLink,
+  Copy,
+  Heart,
+  Check,
+  Tag,
+  Send,
+  MapPin,
+} from "lucide-react";
 import { useState } from "react";
+import { FiInstagram } from "react-icons/fi";
 import type { Place } from "@/types/world";
 import { categoryLabel, countryLabel } from "@/lib/world-places";
 
 interface Props {
   place: Place | null;
   onClose: () => void;
+}
+
+const ACCESS_LABELS: Record<NonNullable<Place["access"]>, string> = {
+  "walk-in": "Walk-in",
+  message: "Message ahead",
+  delivery: "Delivery",
+  appointment: "By appointment",
+};
+
+function cultureLabel(slug: string): string {
+  return slug
+    .split("-")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+function normalizeContactHref(kind: "telegram" | "instagram", value: string): string {
+  const v = value.trim();
+  if (/^https?:\/\//i.test(v)) return v;
+  const handle = v.replace(/^@/, "");
+  return kind === "telegram"
+    ? `https://t.me/${handle}`
+    : `https://instagram.com/${handle}`;
 }
 
 export function PlaceDetail({ place, onClose }: Props) {
@@ -159,6 +192,83 @@ export function PlaceDetail({ place, onClose }: Props) {
             </div>
           </div>
         )}
+
+        {(place.culture ?? place.access) && (
+          <div className="flex flex-wrap gap-x-6 gap-y-3">
+            {place.culture && (
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold mb-1">
+                  Culture
+                </div>
+                <p className="text-[13px] text-[#3B2314]">
+                  {cultureLabel(place.culture)}
+                </p>
+              </div>
+            )}
+            {place.access && (
+              <div>
+                <div className="text-[10px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold mb-1">
+                  Access
+                </div>
+                <p className="text-[13px] text-[#3B2314]">
+                  {ACCESS_LABELS[place.access]}
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {place.contacts &&
+          (place.contacts.telegram ??
+            place.contacts.instagram ??
+            place.contacts.googleMaps) && (
+            <div>
+              <div className="text-[10px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold mb-1">
+                Contact
+              </div>
+              <div className="flex flex-col gap-[6px]">
+                {place.contacts.telegram && (
+                  <a
+                    href={normalizeContactHref(
+                      "telegram",
+                      place.contacts.telegram,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[13px] text-[#3B2314] hover:text-[#D4581A] transition-colors no-underline"
+                  >
+                    <Send className="h-3.5 w-3.5 text-[#7A5C42]" />
+                    {place.contacts.telegram.trim().replace(/^https?:\/\/(t\.me\/)?/i, "").replace(/^@?/, "@")}
+                  </a>
+                )}
+                {place.contacts.instagram && (
+                  <a
+                    href={normalizeContactHref(
+                      "instagram",
+                      place.contacts.instagram,
+                    )}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[13px] text-[#3B2314] hover:text-[#D4581A] transition-colors no-underline"
+                  >
+                    <FiInstagram className="h-3.5 w-3.5 text-[#7A5C42]" />
+                    {place.contacts.instagram.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/\/$/, "").replace(/^@?/, "@")}
+                  </a>
+                )}
+                {place.contacts.googleMaps && (
+                  <a
+                    href={place.contacts.googleMaps}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[13px] text-[#3B2314] hover:text-[#D4581A] transition-colors no-underline"
+                  >
+                    <MapPin className="h-3.5 w-3.5 text-[#7A5C42]" />
+                    Google Maps listing
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
 
         <div>
           <div className="text-[10px] uppercase tracking-[1.5px] text-[#D4581A] font-semibold mb-1">

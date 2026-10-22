@@ -1,4 +1,5 @@
 import { LocationDetail } from "@/components/world/LocationDetail";
+import { getPublicPlaces } from "@/lib/world-places.server";
 import { resourcesForLocation } from "@/lib/resources";
 import { allKnownCountrySlugs, deriveLocation } from "@/lib/derive-location";
 import { locations } from "@/data/world-data";
@@ -32,5 +33,8 @@ export default async function WorldSlugPage({ params }: PageProps) {
   const location = deriveLocation(slug);
   if (!location) notFound();
   const resources = resourcesForLocation(location);
-  return <LocationDetail location={location} resources={resources} />;
+  const places = await getPublicPlaces();
+  return (
+    <LocationDetail location={location} resources={resources} places={places} />
+  );
 }

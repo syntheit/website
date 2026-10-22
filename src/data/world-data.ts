@@ -164,50 +164,7 @@ export const locations: Location[] = [
       { label: "Salta", viewport: { lat: -24.79, lng: -65.41, zoom: 10 } },
       { label: "Misiones", viewport: { lat: -27.37, lng: -54.44, zoom: 9 } },
     ],
-    notes: [
-      {
-        title: "Argentina's parallel exchange rate system",
-        description:
-          "Explainer on the official rate, blue dollar, MEP, CCL, and why Argentina has been running multiple exchange rates simultaneously for years.",
-        url: "https://www.economist.com/the-americas/2023/argentina-exchange-rates",
-        category: "Economy",
-      },
-      {
-        title: "Why asado is Argentina's social infrastructure",
-        description:
-          "Asado isn't just food. It's the primary way Argentines build and maintain relationships. The ritual matters more than the meat.",
-        url: "https://www.bbc.com/travel/argentina-asado",
-        category: "Culture",
-      },
-      {
-        title: "The Salinas Grandes at 3,400m",
-        description:
-          "A massive salt flat in Jujuy. One of the most alien landscapes in South America. Completely empty, perfectly white.",
-        url: "https://en.wikipedia.org/wiki/Salinas_Grandes",
-        category: "Geography",
-      },
-      {
-        title: "How Italian immigration shaped Buenos Aires",
-        description:
-          "Nearly half of Argentines have Italian ancestry. How this wave of immigration defined the food, language, and culture of the country.",
-        url: "https://www.jstor.org/stable/italian-immigration-argentina",
-        category: "History",
-      },
-      {
-        title: "Understanding Argentina's inflation cycles",
-        description:
-          "A brief history of hyperinflation, currency pegs, and the economic patterns that keep repeating every 10-15 years.",
-        url: "https://www.brookings.edu/articles/argentina-inflation",
-        category: "Economy",
-      },
-      {
-        title: "Mate: more than a drink",
-        description:
-          "Sharing mate is an act of trust and friendship. Refusing is considered rude. The ritual is more important than the drink itself.",
-        url: "https://www.atlasobscura.com/foods/mate-argentina",
-        category: "Culture",
-      },
-    ],
+    notes: [],
   },
   {
     slug: "buenos-aires",
@@ -237,36 +194,7 @@ export const locations: Location[] = [
       { label: "Caballito", viewport: { lat: -34.62, lng: -58.44, zoom: 15 } },
       { label: "Nuñez", viewport: { lat: -34.55, lng: -58.46, zoom: 15 } },
     ],
-    notes: [
-      {
-        title: "The bodegón: BA's best-kept secret",
-        description:
-          "Forget the tourist parrillas. The real eating in Buenos Aires happens at bodegones — old-school neighborhood joints with no English menus and massive portions.",
-        url: "https://www.bbc.com/travel/buenos-aires-bodegones",
-        category: "Food",
-      },
-      {
-        title: "Palermo's sub-neighborhoods explained",
-        description:
-          "Palermo Soho, Palermo Hollywood, Palermo Viejo, Palermo Chico. They're all different and locals will judge you for confusing them.",
-        url: "https://wikitravel.org/en/Buenos_Aires/Palermo",
-        category: "Neighborhoods",
-      },
-      {
-        title: "Buenos Aires has the most bookstores per capita in the world",
-        description:
-          "There are over 700 bookstores in BA. El Ateneo Grand Splendid, a converted theater, is consistently ranked among the world's most beautiful.",
-        url: "https://www.theguardian.com/books/buenos-aires-bookstores",
-        category: "Culture",
-      },
-      {
-        title: "Getting around BA without a car",
-        description:
-          "The subte, colectivos, and cycling infrastructure. How porteños actually move around the city and what apps to use.",
-        url: "https://www.reddit.com/r/BuenosAires/wiki/transport",
-        category: "Practical",
-      },
-    ],
+    notes: [],
   },
   {
     slug: "brazil",

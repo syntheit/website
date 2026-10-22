@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "World — Daniel Miller",
   description:
-    "A personal atlas organized by country — places, notes, and local knowledge from around the world.",
+    "A personal atlas organized by country: places, notes, and local knowledge from around the world.",
 };
 
 export default function WorldLayout({

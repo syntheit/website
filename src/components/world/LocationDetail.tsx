@@ -10,7 +10,7 @@ import {
   countPlacesInBbox,
 } from "@/lib/world-places";
 import { PlaceExplorer } from "./PlaceExplorer";
-import type { PlaceFilter } from "@/types/world";
+import type { Place, PlaceFilter } from "@/types/world";
 import type { EnrichedResource } from "@/lib/resources";
 
 function NoteCard({ note }: { note: NoteEntry }) {
@@ -198,9 +198,11 @@ function deriveExplorerProps(location: Location): {
 export function LocationDetail({
   location,
   resources,
+  places,
 }: {
   location: Location;
   resources: EnrichedResource[];
+  places: Place[];
 }) {
   const [noteSearch, setNoteSearch] = useState("");
   const [activeNoteCategory, setActiveNoteCategory] = useState("All");
@@ -342,6 +344,7 @@ export function LocationDetail({
         <div className="h-[640px] rounded-2xl overflow-hidden border-[1.5px] border-[rgba(59,35,20,0.08)] mb-9">
           <PlaceExplorer
             key={location.slug}
+            places={places}
             initialFilter={explorer.filter}
             initialViewState={explorer.initialViewState}
             areaFilters={location.areaFilters}
