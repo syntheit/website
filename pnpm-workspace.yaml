@@ -1,7 +1,10 @@
-onlyBuiltDependencies:
-  - '@prisma/client'
-  - '@prisma/engines'
-  - '@tailwindcss/oxide'
-  - prisma
-  - sharp
-  - unrs-resolver
+allowBuilds:
+  '@tailwindcss/oxide': true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  # Chromium comes from the Nix devShell (PUPPETEER_EXECUTABLE_PATH).
+  puppeteer: false
+publicHoistPattern:
+  - '*eslint*'
+  - '*prettier*'
