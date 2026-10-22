@@ -65,7 +65,6 @@ export default async function Image() {
                 backgroundColor: '#F5EBD9',
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 // Satori accepts ArrayBuffer image sources; the string cast
                 // just satisfies the DOM typing.

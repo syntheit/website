@@ -1,14 +1,12 @@
 interface RetrospendShowcaseProps {
   description: string;
   differentiators: Array<{ label: string; value: string }>;
-  tech: string[];
   links: { app: string; github: string };
 }
 
 export function RetrospendShowcase({
   description,
   differentiators,
-  tech,
   links,
 }: RetrospendShowcaseProps) {
   // Dev-only until real screenshots exist — prod collapses to one column
@@ -69,17 +67,6 @@ export function RetrospendShowcase({
             >
               GitHub
             </a>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {tech.map((t) => (
-              <span
-                key={t}
-                className="rounded-full bg-primary/10 px-3 py-1 text-xs text-primary"
-              >
-                {t}
-              </span>
-            ))}
           </div>
         </div>
 

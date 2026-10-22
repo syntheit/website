@@ -80,8 +80,8 @@ export default async function PhotographyPage() {
           Photography <span className="italic text-primary">Portfolio</span>
         </h1>
         <p className="text-base text-muted-foreground leading-[1.7] max-w-[520px] mx-auto">
-          Capturing moments, stories, and the beauty of the world through my lens.
-          From Buenos Aires streets to Patagonian landscapes.
+          Street scenes, travels, and daily life, mostly Buenos Aires lately.
+          Everything here is free to download and use on Pexels.
         </p>
       </div>
 

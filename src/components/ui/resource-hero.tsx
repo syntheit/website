@@ -5,9 +5,9 @@ export function ResourceHero() {
         Cool <span className="text-[#D4581A] italic">Resources</span>
       </h1>
       <p className="text-[16px] text-[#7A5C42] leading-[1.7] max-w-[560px] mx-auto">
-        A curated collection of awesome websites, tools, and resources that I
-        find interesting and useful. From coding tutorials to random Wikipedia
-        articles, there&apos;s something here for everyone.
+        Links I&apos;ve been collecting for years: tools, articles, rabbit
+        holes, and sites I&apos;d be annoyed to lose. Organized so I can find
+        things again, public in case you want them too.
       </p>
     </div>
   );

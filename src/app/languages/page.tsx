@@ -57,7 +57,7 @@ const languages = [
     filled: 6,
     isNative: false,
     blurb:
-      "Brazilian friend João is the main driver — we speak Portuguese together, he helps with BRL logistics, and trips to southern Brazil fill in the gaps. Spanish and Portuguese reinforce each other constantly.",
+      "Brazilian friend João is the main driver: we speak Portuguese together, he helps with BRL logistics, and trips to southern Brazil fill in the gaps. Spanish and Portuguese reinforce each other constantly.",
     goal: null,
   },
 ];
@@ -264,37 +264,43 @@ export default function LanguagesPage() {
       {/* Stripe Divider */}
       <StripeDivider />
 
-      {/* My Approach — dev-only until the copy is written; never ships as a placeholder. */}
-      {process.env.NODE_ENV !== "production" && (
-      <>
+      {/* My Approach */}
       <section className="px-8 md:px-14 py-16">
         <h2 className="font-serif text-[32px] font-extrabold mb-8 tracking-tight">
           My Approach
         </h2>
-        <div className="bg-[#F5EBD9] rounded-xl p-8 border-2 border-dashed border-[rgba(59,35,20,0.15)] text-[#7A5C42] text-[14px] italic leading-[1.7] max-w-[680px]">
-          {/* TODO: Daniel writes this. 2-3 paragraphs in first person. */}
-          {/* Paragraph 1 — The philosophy: */}
-          {/*   "I don't study languages — I live them." Every language tied to real people, places, experiences. */}
-          {/*   No flashcards, no grammar tables. You learn Spanish because you live in BA, Russian because of your heritage */}
-          {/*   and the cultural center on Saturdays, French because it speaks to your soul. */}
-          {/* Paragraph 2 — The method: */}
-          {/*   Steve Kaufmann-aligned: comprehensible input at 85-90%, speak early, tolerate mistakes. */}
-          {/*   De-anglicize entertainment — if content doesn't need English, it shouldn't be in English. */}
-          {/*   French films, Argentine literature, Russian mafia game nights, Portuguese with João. */}
-          {/*   LLMs as infinitely patient conversation partners and tutors. */}
-          {/* Paragraph 3 — The psycholinguistic reality (optional, makes it interesting): */}
-          {/*   Cross-linguistic activation — wrong-language words surface daily, dreams in mixed languages, */}
-          {/*   mental math now in Spanish. Romance cluster functions as unified system. */}
-          {/*   ~20 min warmup to fluency when switching. The goal is thinking in each language, not translating. */}
-          {/* Tone: confident but not preachy. You're describing what works for you, not prescribing. */}
-          [Write your approach here]
+        <div className="space-y-5 text-[#7A5C42] text-[15px] leading-[1.75] max-w-[680px]">
+          <p>
+            I don&apos;t study languages, I live them. Every language I speak
+            is tied to a place, a group of people, a set of experiences. I
+            never sat down and decided to learn Spanish; I moved to Buenos
+            Aires and started talking to people. Flashcards and grammar drills
+            have never stuck for me. What sticks is using the language for
+            real things with real people, even if the stakes are just being
+            funny at an asado.
+          </p>
+          <p>
+            The method, to the extent there is one: comprehensible input at
+            85-90% understanding, speaking early, tolerating mistakes, and
+            keeping entertainment out of English when it doesn&apos;t need to
+            be there. French films, Argentine novels in Spanish, Russian game
+            nights on Saturdays, Portuguese with Brazilian friends. LLMs as
+            infinitely patient tutors.
+          </p>
+          <p>
+            Six languages in, the strangest part is what happens between them.
+            Wrong-language words surface daily, dreams come in mixed
+            languages, and my mental math has quietly switched to Spanish. The
+            Romance languages behave like one system in my head, and the
+            Slavic ones are becoming another. The goal was never a number;
+            it&apos;s thinking in each language instead of translating into
+            it.
+          </p>
         </div>
       </section>
 
       {/* Stripe Divider (reversed) */}
       <StripeDivider reversed />
-      </>
-      )}
 
       {/* Roadmap */}
       <section className="px-8 md:px-14 py-16">
