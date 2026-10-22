@@ -1,6 +1,6 @@
+import { readFile } from 'node:fs/promises'
+import { join } from 'node:path'
 import { ImageResponse } from 'next/og'
-
-export const runtime = 'edge'
 
 export const alt = 'Daniel Miller — Software engineer, photographer, and entrepreneur in Buenos Aires'
 export const size = {
@@ -17,9 +17,11 @@ export default async function Image() {
   // Embedded local asset — Satori can't decode webp, and fetching our own
   // prod URL at render time is brittle. profile-og.png is a PNG copy of
   // public/profile.webp.
-  const profile = await fetch(
-    new URL('../../public/profile-og.png', import.meta.url),
-  ).then((res) => res.arrayBuffer())
+  const file = await readFile(join(process.cwd(), 'public/profile-og.png'))
+  const profile = file.buffer.slice(
+    file.byteOffset,
+    file.byteOffset + file.byteLength,
+  )
 
   return new ImageResponse(
     (

@@ -1,6 +1,7 @@
 /** @type {import("next").NextConfig} */
 const config = {
   output: 'standalone',
+  allowedDevOrigins: ['harbor', '100.109.63.87'],
   async redirects() {
     return [
       // /travel and /minigames were removed in the v2 redesign.
