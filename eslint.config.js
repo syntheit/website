@@ -1,15 +1,11 @@
-import { FlatCompat } from "@eslint/eslintrc";
+import nextVitals from "eslint-config-next/core-web-vitals";
 import tseslint from 'typescript-eslint';
-
-const compat = new FlatCompat({
-  baseDirectory: import.meta.dirname,
-});
 
 export default tseslint.config(
   {
 		ignores: ['.next']
 	},
-  ...compat.extends("next/core-web-vitals"),
+  ...nextVitals,
   {
     files: ['**/*.ts', '**/*.tsx'],
 		extends: [
@@ -31,6 +27,10 @@ export default tseslint.config(
       { checksVoidReturn: { attributes: false } },
     ],
   },
+  },
+  {
+    // New in eslint-config-next 16 (react-hooks v7); existing effects predate it.
+    rules: { "react-hooks/set-state-in-effect": "warn" },
   },
   {
 		linterOptions: {

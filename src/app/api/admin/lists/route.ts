@@ -64,6 +64,6 @@ export async function POST(req: Request) {
     updatedAt: now,
   };
   await upsertCustomList(created);
-  revalidateTag("world-data");
+  revalidateTag("world-data", { expire: 0 });
   return NextResponse.json({ list: created }, { status: 201 });
 }

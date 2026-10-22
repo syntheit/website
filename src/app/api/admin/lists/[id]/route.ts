@@ -44,12 +44,12 @@ export async function PATCH(req: Request, { params }: PageProps) {
       updatedAt: new Date().toISOString(),
     };
     await upsertCustomList(merged);
-    revalidateTag("world-data");
+    revalidateTag("world-data", { expire: 0 });
     return NextResponse.json({ list: merged });
   }
 
   const result = await patchListOverride(id, body);
-  revalidateTag("world-data");
+  revalidateTag("world-data", { expire: 0 });
   return NextResponse.json({ id, override: result });
 }
 
@@ -63,6 +63,6 @@ export async function DELETE(_req: Request, { params }: PageProps) {
   }
   const ok = await deleteCustomList(id);
   if (!ok) return NextResponse.json({ error: "not found" }, { status: 404 });
-  revalidateTag("world-data");
+  revalidateTag("world-data", { expire: 0 });
   return NextResponse.json({ ok: true });
 }

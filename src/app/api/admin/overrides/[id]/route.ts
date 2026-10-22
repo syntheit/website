@@ -17,6 +17,6 @@ export async function PATCH(req: Request, { params }: PageProps) {
   }
   const result = await patchOverride(id, body);
   // Tell the public site to re-render world pages on the next request.
-  revalidateTag("world-data");
+  revalidateTag("world-data", { expire: 0 });
   return NextResponse.json({ id, override: result });
 }

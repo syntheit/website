@@ -18,6 +18,8 @@ import type {
   GeoJSONSource,
   ExpressionSpecification,
   MapMouseEvent,
+  MapGeoJSONFeature,
+  PointLike,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Place } from "@/types/world";
@@ -334,9 +336,9 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
     const pinLayers = iconsLoaded ? [PIN_LAYER] : [FALLBACK_LAYER];
 
     const safeQuery = (
-      point: maplibregl.PointLike,
+      point: PointLike,
       layers: string[],
-    ): maplibregl.MapGeoJSONFeature[] => {
+    ): MapGeoJSONFeature[] => {
       try {
         return map.queryRenderedFeatures(point, { layers });
       } catch {
@@ -390,7 +392,7 @@ export const PlaceMap = forwardRef<PlaceMapHandle, Props>(function PlaceMap(
     // Click handlers are sync wrappers around async work so MapLibre's
     // event system (which expects void returns) doesn't see a Promise.
     const expandCluster = async (
-      cluster: maplibregl.MapGeoJSONFeature,
+      cluster: MapGeoJSONFeature,
     ): Promise<void> => {
       const clusterId = cluster.properties?.cluster_id as number | undefined;
       const src = map.getSource(SOURCE_ID);
