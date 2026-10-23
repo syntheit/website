@@ -14,6 +14,7 @@ import Map, {
   Popup,
   type MapRef,
 } from "react-map-gl/maplibre";
+import { setWorkerUrl } from "maplibre-gl";
 import type {
   GeoJSONSource,
   ExpressionSpecification,
@@ -29,6 +30,14 @@ import {
   UNCATEGORIZED_COLOR,
   ICON_PATHS,
 } from "./place-icons";
+
+// maplibre 6 resolves its worker via import.meta.url, which points at a bundled
+// chunk under Next. Point it at the worker emitted as a static asset instead.
+if (typeof window !== "undefined") {
+  setWorkerUrl(
+    new URL("maplibre-gl/dist/maplibre-gl-worker.mjs", import.meta.url).href,
+  );
+}
 
 export interface PlaceMapHandle {
   flyTo: (target: { lat: number; lng: number; zoom?: number }) => void;
